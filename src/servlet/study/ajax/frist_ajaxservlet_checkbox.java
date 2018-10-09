@@ -30,11 +30,17 @@ public class frist_ajaxservlet_checkbox extends HttpServlet {
 	protected void doGet(HttpServletRequest request, HttpServletResponse response) throws ServletException, IOException {
 		// TODO Auto-generated method stub
         PrintWriter out = response.getWriter();
-		   String[] values = request.getParameterValues("version") ;
-		   if(values!=null&&values.length>0) {
-		        for(int i= 0 ;i<values.length;i++)
-		         out.println(values[i])       ;  
-		   }
+        /*String val=request.getParameter("ali2000");
+        System.out.print(val);*/
+		String[] values = request.getParameterValues("version") ;
+		if(values!=null&&values.length>0) {
+		     for(int i= 0 ;i<values.length;i++) {
+		    	 //out.write(values[i]) ;  
+		    	 System.out.println(values[i]);
+		     }
+		}
+		out.write("true") ; 
+		out.close();
 		//response.getWriter().append("Served at: ").append(request.getContextPath());
 	}
 
