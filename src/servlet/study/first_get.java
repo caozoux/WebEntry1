@@ -8,7 +8,7 @@ import javax.servlet.annotation.WebServlet;
 import javax.servlet.http.HttpServlet;
 import javax.servlet.http.HttpServletRequest;
 import javax.servlet.http.HttpServletResponse;
-
+import hotfix.patch.*;
 /**
  * Servlet implementation class first_get
  */
@@ -29,7 +29,10 @@ public class first_get extends HttpServlet {
 	 */
 	protected void doGet(HttpServletRequest request, HttpServletResponse response) throws ServletException, IOException {
 		// TODO Auto-generated method stub
-	       // 设置响应内容类型
+		patchMerge merge=new patchMerge();
+		
+		StringBuffer mergeout = merge.mergePatch("master", "0001-web-test.patch");
+		// 设置响应内容类型
         response.setContentType("text/html;charset=UTF-8");
 
         PrintWriter out = response.getWriter();
@@ -48,6 +51,8 @@ public class first_get extends HttpServlet {
             "  <li><b>网址</b>："
             + request.getParameter("url") + "\n" +
             "</ul>\n" +
+            "  <li><b>git am </b>："
+            + mergeout.toString() +
             "</body></html>");
 	}
 
