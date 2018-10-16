@@ -6,14 +6,24 @@ import java.lang.StringBuffer;
 
 public class patchMerge {
 	
+	public int mStatus;
+	
     public patchMerge() {
-
+    	//default is 0, failed
+    	mStatus = 0;
     }
     
-	public StringBuffer mergePatch(String branch, String patch)
+    public int mergeIsPass()
+    {
+    	return mStatus;
+    }
+ 
+	public StringBuffer mergePatch(String kernel, String akid)
 	{
 		StringBuffer output = new StringBuffer();
-		String cmd="git -C /Users/zoucao-ipc/aa/gitlab/mekstone am /Users/zoucao-ipc/Downloads/0001-web-test.patch";
+		String cmd="/Users/zoucao-ipc/gitlab/env/hotfix/mergePatch.sh -w /Users/zoucao-ipc/gitlab/alitest/ "
+				+" -k "+kernel+" -a "+akid;
+			
 		Process p = null;
 		
         try {
@@ -33,6 +43,7 @@ public class patchMerge {
 
             		 output.append(line + "\n");
             	 }
+            	 mStatus = 1;
              } else {
               	 reader=new BufferedReader(new InputStreamReader(p.getErrorStream()));
                  
@@ -41,11 +52,13 @@ public class patchMerge {
             	 while( (line = reader.readLine()) != null) {
             		 output.append(line + "\n");
             	 }
+            	 mStatus = 0;
              }
              
             
         } catch (Exception e) {
              e.printStackTrace();
+             mStatus = 0;
              output.append("\n git failed\n");
         }
         output.append("</b>");

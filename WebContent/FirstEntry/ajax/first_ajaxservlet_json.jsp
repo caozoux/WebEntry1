@@ -25,6 +25,14 @@
                 dataType: "text",
                 success: function(data){
                 	console.log(data);
+                	var dataObj = JSON.parse(data);
+                	var jsonText = JSON.stringify(data);
+                	var list = eval(data);//解析json
+                	for(var i=0;i<list.length;i++)
+                	{
+                		var id=list[i].name;
+                		console.log(id);
+                	}
                     if(data=="true"){
                         $("#show").html("===ok==="+"<br/>"+"name="+$("[name=name]").val()+"<br/>"+"pwd="+$("[name=pwd]").val());
                     }else if(data=="false"){

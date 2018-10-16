@@ -31,7 +31,7 @@ public class first_get extends HttpServlet {
 		// TODO Auto-generated method stub
 		patchMerge merge=new patchMerge();
 		
-		StringBuffer mergeout = merge.mergePatch("master", "0001-web-test.patch");
+		StringBuffer mergeout = merge.mergePatch("ali2013", "D720768");
 		// 设置响应内容类型
         response.setContentType("text/html;charset=UTF-8");
 
