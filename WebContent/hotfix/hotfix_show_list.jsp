@@ -9,28 +9,28 @@
   <!-- Tell the browser to be responsive to screen width -->
   <meta content="width=device-width, initial-scale=1, maximum-scale=1, user-scalable=no" name="viewport">
   <!-- Bootstrap 3.3.6 -->
-  <link rel="stylesheet" href="../resource/css/bootstrap/css/bootstrap.min.css">
+  <link rel="stylesheet" href="/WebEntry/resource/css/bootstrap/css/bootstrap.min.css">
   <!-- Font Awesome -->
   <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/4.5.0/css/font-awesome.min.css">
   <!-- Ionicons -->
   <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/ionicons/2.0.1/css/ionicons.min.css">
   <!-- Theme style -->
-  <link rel="stylesheet" href="../resource/css/dist/css/AdminLTE.min.css">
+  <link rel="stylesheet" href="/WebEntry/resource/css/dist/css/AdminLTE.min.css">
   <!-- AdminLTE Skins. Choose a skin from the css/skins
        folder instead of downloading all of them to reduce the load. -->
-  <link rel="stylesheet" href="../resource/css/dist/css/skins/_all-skins.min.css">
+  <link rel="stylesheet" href="/WebEntry/resource/css/dist/css/skins/_all-skins.min.css">
   <!-- iCheck -->
-  <link rel="stylesheet" href="../resource/css/plugins/iCheck/flat/blue.css">
+  <link rel="stylesheet" href="/WebEntry/resource/css/plugins/iCheck/flat/blue.css">
   <!-- Morris chart -->
-  <link rel="stylesheet" href="../resource/css/plugins/morris/morris.css">
+  <link rel="stylesheet" href="/WebEntry/resource/css/plugins/morris/morris.css">
   <!-- jvectormap -->
-  <link rel="stylesheet" href="../resource/css/plugins/jvectormap/jquery-jvectormap-1.2.2.css">
+  <link rel="stylesheet" href="/WebEntry/resource/css/plugins/jvectormap/jquery-jvectormap-1.2.2.css">
   <!-- Date Picker -->
-  <link rel="stylesheet" href="../resource/css/plugins/datepicker/datepicker3.css">
+  <link rel="stylesheet" href="/WebEntry/resource/css/plugins/datepicker/datepicker3.css">
   <!-- Daterange picker -->
-  <link rel="stylesheet" href="../resource/css/plugins/daterangepicker/daterangepicker-bs3.css">
+  <link rel="stylesheet" href="/WebEntry/resource/css/plugins/daterangepicker/daterangepicker-bs3.css">
   <!-- bootstrap wysihtml5 - text editor -->
-  <link rel="stylesheet" href="../resource/css/plugins/bootstrap-wysihtml5/bootstrap3-wysihtml5.min.css">
+  <link rel="stylesheet" href="/WebEntry/resource/css/plugins/bootstrap-wysihtml5/bootstrap3-wysihtml5.min.css">
 
   <!-- HTML5 Shim and Respond.js IE8 support of HTML5 elements and media queries -->
   <!-- WARNING: Respond.js doesn t work if you view the page via file:// -->
@@ -73,7 +73,7 @@
                   <li><!-- start message -->
                     <a href="#">
                       <div class="pull-left">
-                        <img src="../resource/css/dist/img/user2-160x160.jpg" class="img-circle" alt="User Image">
+                        <img src="/WebEntry/resource/css/dist/img/user2-160x160.jpg" class="img-circle" alt="User Image">
                       </div>
                       <h4>
                         Support Team
@@ -86,7 +86,7 @@
                   <li>
                     <a href="#">
                       <div class="pull-left">
-                        <img src="../resource/css/dist/img/user3-128x128.jpg" class="img-circle" alt="User Image">
+                        <img src="/WebEntry/resource/css/dist/img/user3-128x128.jpg" class="img-circle" alt="User Image">
                       </div>
                       <h4>
                         AdminLTE Design Team
@@ -98,7 +98,7 @@
                   <li>
                     <a href="#">
                       <div class="pull-left">
-                        <img src="../resource/css/dist/img/user4-128x128.jpg" class="img-circle" alt="User Image">
+                        <img src="/WebEntry/resource/css/dist/img/user4-128x128.jpg" class="img-circle" alt="User Image">
                       </div>
                       <h4>
                         Developers
@@ -110,7 +110,7 @@
                   <li>
                     <a href="#">
                       <div class="pull-left">
-                        <img src="../resource/css/dist/img/user3-128x128.jpg" class="img-circle" alt="User Image">
+                        <img src="/WebEntry/resource/css/dist/img/user3-128x128.jpg" class="img-circle" alt="User Image">
                       </div>
                       <h4>
                         Sales Department
@@ -122,7 +122,7 @@
                   <li>
                     <a href="#">
                       <div class="pull-left">
-                        <img src="../resource/css/dist/img/user4-128x128.jpg" class="img-circle" alt="User Image">
+                        <img src="/WebEntry/resource/css/dist/img/user4-128x128.jpg" class="img-circle" alt="User Image">
                       </div>
                       <h4>
                         Reviewers
@@ -255,13 +255,13 @@
           <!-- User Account: style can be found in dropdown.less -->
           <li class="dropdown user user-menu">
             <a href="#" class="dropdown-toggle" data-toggle="dropdown">
-              <img src="../resource/css/dist/img/user2-160x160.jpg" class="user-image" alt="User Image">
+              <img src="/WebEntry/resource/css/dist/img/user2-160x160.jpg" class="user-image" alt="User Image">
               <span class="hidden-xs">user name</span>
             </a>
             <ul class="dropdown-menu">
               <!-- User image -->
               <li class="user-header">
-                <img src="../resource/css/dist/img/user2-160x160.jpg" class="img-circle" alt="User Image">
+                <img src="/WebEntry/resource/css/dist/img/user2-160x160.jpg" class="img-circle" alt="User Image">
 
                 <p>
                   Alexander Pierce - Web Developer
@@ -377,60 +377,34 @@
     <!-- Main content -->
     <section class="content">
 		<div class="row">
-			<section class="col-lg-7 connectedSortable ui-sortable">
-			<!-- handle submit commid for hotfix -->
-				<div id="col-md5-6">
-					<div class="box box-info">
-						<div class="box-header with-border">
-						  <h3 class="box-title">信息更新</h3>
-						</div>
-						<form class="form-horizontal"  action="../hotfix_servlet_akidupdate">
-							<div class="form-group">
-								<label for="inputName" class="col-sm-2 control-label">ak id</label>
-								<div class="col-sm-10">
-								  <input type="text" class="form-control" name="akid">
-								</div>
-							</div>
-							<div class="form-group">
-								<label for="inputName" class="col-sm-2 control-label">Aone</label>
-								<div class="col-sm-10">
-								  <input type="text" class="form-control" name="aone">
-								</div>
-							</div>
-							<div class="form-group">
-								<label for="inputName" class="col-sm-2 control-label">摘要</label>
-								<div class="col-sm-10">
-								  <input type="text" class="form-control" name="summary">
-								</div>
-							</div>
-							<div class="form-group">
-								<label for="inputName" class="col-sm-2 control-label">描述</label>
-								<div class="col-sm-10">
-								  <input type="text" class="form-control" name="description">
-								</div>
-							</div>
-							<div class="form-group">
-								<label for="inputName" class="col-sm-2 control-label">跟踪者</label>
-								<div class="col-sm-10">
-								  <input type="text" class="form-control" name="author">
-								</div>
-							</div>
-							<div class="form-group">
-								<label for="inputName" class="col-sm-2 control-label">wiki链接</label>
-								<div class="col-sm-10">
-								  <input type="text" class="form-control" name="wiki_link">
-								</div>
-							</div>
-							<div class="form-group">
-								<div class="col-sm-offset-2 col-sm-10">
-									<button type="submit" class="btn btn-danger">Submit</button>
-								</div>
-							</div>
-						</form>
+			<a href="/twitter-bootstrap/" class="package list-group-item" target="_blank" onclick="_hmt.push(['_trackEvent', 'packages', 'click', 'twitter-bootstrap'])">
+				<div class="row">
+					<div class="col-md-3">
+						<h4 class="package-name">twitter-bootstrap</h4>
 					</div>
-
+					<div class="col-md-9 hidden-xs">
+						<p class="package-description">Bootstrap 是全球最受欢迎的前端组件库，用于开发响应式布局、移动设备优先的 WEB 项目。</p>
+					</div>
+					<div class="package-extra-info col-md-9 col-md-offset-3 col-xs-12">
+					</div>
 				</div>
-			</section>
+			</a>
+			<%@ page language="java" import="java.util.List" %>
+			<% 
+				List<String> list=(List<String>)request.getAttribute("akid_list");
+				for(String str : list) {
+					out.print("<a href='/twitter-bootstrap/' class='package list-group-item' target='_blank' onclick='_hmt.push(['_trackEvent', 'packages', 'click', 'twitter-bootstrap'])'>");
+					out.print("<div class='row'>");
+					out.print("<div class='col-md-3'>");
+					out.print("<h4 class='package-name'>"+str+"</h4>");
+					out.print("</div>");
+					out.print("<div class='col-md-9 hidden-xs'>");
+					out.print("<p class='package-description'>Bootstrap 是全球最受欢迎的前端组件库，用于开发响应式布局、移动设备优先的 WEB 项目。</p>");
+					out.print("</div>");
+					out.print("<div class='package-extra-info col-md-9 col-md-offset-3 col-xs-12'>");
+					out.print("</div></div></div>");
+				}
+			%>
 		</div>
     </section>
     <!-- /.content -->
@@ -641,7 +615,7 @@
 <!-- ./wrapper -->
 
 <!-- jQuery 2.2.0 -->
-<script src="../resource/css/plugins/jQuery/jQuery-2.2.0.min.js"></script>
+<script src="/WebEntry/resource/css/plugins/jQuery/jQuery-2.2.0.min.js"></script>
 <!-- jQuery UI 1.11.4 -->
 <script src="https://code.jquery.com/ui/1.11.4/jquery-ui.min.js"></script>
 <!-- Resolve conflict in jQuery UI tooltip with Bootstrap tooltip -->
@@ -649,68 +623,47 @@
   $.widget.bridge('uibutton', $.ui.button);
 </script>
 <!-- Bootstrap 3.3.6 -->
-<script src="../resource/css/bootstrap/js/bootstrap.min.js"></script>
+<script src="/WebEntry/resource/css/bootstrap/js/bootstrap.min.js"></script>
 <!-- Morris.js charts -->
 <script src="https://cdnjs.cloudflare.com/ajax/libs/raphael/2.1.0/raphael-min.js"></script>
-<!-- <script src="../resource/css/plugins/morris/morris.min.js"></script>-->
+<!-- <script src="/WebEntry/resource/css/plugins/morris/morris.min.js"></script>-->
 <!-- Sparkline -->
-<script src="../resource/css/plugins/sparkline/jquery.sparkline.min.js"></script>
+<script src="/WebEntry/resource/css/plugins/sparkline/jquery.sparkline.min.js"></script>
 <!-- jvectormap -->
-<script src="../resource/css/plugins/jvectormap/jquery-jvectormap-1.2.2.min.js"></script>
-<script src="../resource/css/plugins/jvectormap/jquery-jvectormap-world-mill-en.js"></script>
+<script src="/WebEntry/resource/css/plugins/jvectormap/jquery-jvectormap-1.2.2.min.js"></script>
+<script src="/WebEntry/resource/css/plugins/jvectormap/jquery-jvectormap-world-mill-en.js"></script>
 <!-- jQuery Knob Chart -->
-<script src="../resource/css/plugins/knob/jquery.knob.js"></script>
+<script src="/WebEntry/resource/css/plugins/knob/jquery.knob.js"></script>
 <!-- daterangepicker -->
 <script src="https://cdnjs.cloudflare.com/ajax/libs/moment.js/2.11.2/moment.min.js"></script>
-<script src="../resource/css/plugins/daterangepicker/daterangepicker.js"></script>
+<script src="/WebEntry/resource/css/plugins/daterangepicker/daterangepicker.js"></script>
 <!-- datepicker -->
-<script src="../resource/css/plugins/datepicker/bootstrap-datepicker.js"></script>
+<script src="/WebEntry/resource/css/plugins/datepicker/bootstrap-datepicker.js"></script>
 <!-- Bootstrap WYSIHTML5 -->
-<script src="../resource/css/plugins/bootstrap-wysihtml5/bootstrap3-wysihtml5.all.min.js"></script>
+<script src="/WebEntry/resource/css/plugins/bootstrap-wysihtml5/bootstrap3-wysihtml5.all.min.js"></script>
 <!-- Slimscroll -->
-<script src="../resource/css/plugins/slimScroll/jquery.slimscroll.min.js"></script>
+<script src="/WebEntry/resource/css/plugins/slimScroll/jquery.slimscroll.min.js"></script>
 <!-- FastClick -->
-<script src="../resource/css/plugins/fastclick/fastclick.js"></script>
+<script src="/WebEntry/resource/css/plugins/fastclick/fastclick.js"></script>
 <!-- AdminLTE App -->
-<script src="../resource/css/dist/js/app.min.js"></script>
+<script src="/WebEntry/resource/css/dist/js/app.min.js"></script>
 <!-- AdminLTE for demo purposes -->
-<script src="../resource/css/dist/js/demo.js"></script>
+<script src="/WebEntry/resource/css/dist/js/demo.js"></script>
 
 <script type="text/javascript">
     $(document).ready(function(){
-        $("[value=GETsubmit]").click(function(){
-        	var params = '';
-        	console.log($("[name=akid]").val())
-        	$('input:checkbox[name=version]:checked').each(function(k){
-        	    if(k == 0){
-        	    	params = "version="+$(this).parent().text();
-        	    }else{
-        	    	params += '&version='+$(this).parent().text();
-        	    }
-        	})
-        	
-			$.ajax({
-				type: "GET",
-				url: "../hotfix_ajaxservlet_mergetPatch?"+params+"&akid="+$("[name=akid]").val()+"&date="+new Date().getTime(),
-				dataType: "text",
-				success: function(data){
-					var status=""
-					var json = eval('('+data+')'); //数组
-	                $.each(json, function (index) {  
-	                    //循环获取数据    
-	                    
-	                  	if (json[index].status == "ok") {
-	                  		status += json[index].version+"(success) ";
-	                  	} else {
-	                  		status += json[index].version+"(failed) ";
-	                  	}
-	                });  
-					$("#show").html(status);
-				},
-				error: function(){
-					$("#show").html("Error XMLHttpRequest");
-				}
-			});
+		$(".editevent").click(function() {
+			console.log("1234")
+			if ($(this).parent().parent().children(".form-horizontal").is(":hidden")) {
+				$(this).parent().parent().children(".form-horizontal").show()
+			} else {
+				$(this).parent().parent().children(".form-horizontal").hide()
+			}
+			
+		});
+		$("#akid_submit").click(function() {
+			console.log("22")
+			$(this).parent(".form-horizontal").hide()
 		});
 	});
 </script>

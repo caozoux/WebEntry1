@@ -9,28 +9,28 @@
   <!-- Tell the browser to be responsive to screen width -->
   <meta content="width=device-width, initial-scale=1, maximum-scale=1, user-scalable=no" name="viewport">
   <!-- Bootstrap 3.3.6 -->
-  <link rel="stylesheet" href="../resource/css/bootstrap/css/bootstrap.min.css">
+  <link rel="stylesheet" href="/WebEntry/resource/css/bootstrap/css/bootstrap.min.css">
   <!-- Font Awesome -->
   <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/4.5.0/css/font-awesome.min.css">
   <!-- Ionicons -->
   <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/ionicons/2.0.1/css/ionicons.min.css">
   <!-- Theme style -->
-  <link rel="stylesheet" href="../resource/css/dist/css/AdminLTE.min.css">
+  <link rel="stylesheet" href="/WebEntry/resource/css/dist/css/AdminLTE.min.css">
   <!-- AdminLTE Skins. Choose a skin from the css/skins
        folder instead of downloading all of them to reduce the load. -->
-  <link rel="stylesheet" href="../resource/css/dist/css/skins/_all-skins.min.css">
+  <link rel="stylesheet" href="/WebEntry/resource/css/dist/css/skins/_all-skins.min.css">
   <!-- iCheck -->
-  <link rel="stylesheet" href="../resource/css/plugins/iCheck/flat/blue.css">
+  <link rel="stylesheet" href="/WebEntry/resource/css/plugins/iCheck/flat/blue.css">
   <!-- Morris chart -->
-  <link rel="stylesheet" href="../resource/css/plugins/morris/morris.css">
+  <link rel="stylesheet" href="/WebEntry/resource/css/plugins/morris/morris.css">
   <!-- jvectormap -->
-  <link rel="stylesheet" href="../resource/css/plugins/jvectormap/jquery-jvectormap-1.2.2.css">
+  <link rel="stylesheet" href="/WebEntry/resource/css/plugins/jvectormap/jquery-jvectormap-1.2.2.css">
   <!-- Date Picker -->
-  <link rel="stylesheet" href="../resource/css/plugins/datepicker/datepicker3.css">
+  <link rel="stylesheet" href="/WebEntry/resource/css/plugins/datepicker/datepicker3.css">
   <!-- Daterange picker -->
-  <link rel="stylesheet" href="../resource/css/plugins/daterangepicker/daterangepicker-bs3.css">
+  <link rel="stylesheet" href="/WebEntry/resource/css/plugins/daterangepicker/daterangepicker-bs3.css">
   <!-- bootstrap wysihtml5 - text editor -->
-  <link rel="stylesheet" href="../resource/css/plugins/bootstrap-wysihtml5/bootstrap3-wysihtml5.min.css">
+  <link rel="stylesheet" href="/WebEntry/resource/css/plugins/bootstrap-wysihtml5/bootstrap3-wysihtml5.min.css">
 
   <!-- HTML5 Shim and Respond.js IE8 support of HTML5 elements and media queries -->
   <!-- WARNING: Respond.js doesn t work if you view the page via file:// -->
@@ -73,7 +73,7 @@
                   <li><!-- start message -->
                     <a href="#">
                       <div class="pull-left">
-                        <img src="../resource/css/dist/img/user2-160x160.jpg" class="img-circle" alt="User Image">
+                        <img src="/WebEntry/resource/css/dist/img/user2-160x160.jpg" class="img-circle" alt="User Image">
                       </div>
                       <h4>
                         Support Team
@@ -86,7 +86,7 @@
                   <li>
                     <a href="#">
                       <div class="pull-left">
-                        <img src="../resource/css/dist/img/user3-128x128.jpg" class="img-circle" alt="User Image">
+                        <img src="/WebEntry/resource/css/dist/img/user3-128x128.jpg" class="img-circle" alt="User Image">
                       </div>
                       <h4>
                         AdminLTE Design Team
@@ -98,7 +98,7 @@
                   <li>
                     <a href="#">
                       <div class="pull-left">
-                        <img src="../resource/css/dist/img/user4-128x128.jpg" class="img-circle" alt="User Image">
+                        <img src="/WebEntry/resource/css/dist/img/user4-128x128.jpg" class="img-circle" alt="User Image">
                       </div>
                       <h4>
                         Developers
@@ -110,7 +110,7 @@
                   <li>
                     <a href="#">
                       <div class="pull-left">
-                        <img src="../resource/css/dist/img/user3-128x128.jpg" class="img-circle" alt="User Image">
+                        <img src="/WebEntry/resource/css/dist/img/user3-128x128.jpg" class="img-circle" alt="User Image">
                       </div>
                       <h4>
                         Sales Department
@@ -122,7 +122,7 @@
                   <li>
                     <a href="#">
                       <div class="pull-left">
-                        <img src="../resource/css/dist/img/user4-128x128.jpg" class="img-circle" alt="User Image">
+                        <img src="/WebEntry/resource/css/dist/img/user4-128x128.jpg" class="img-circle" alt="User Image">
                       </div>
                       <h4>
                         Reviewers
@@ -255,13 +255,13 @@
           <!-- User Account: style can be found in dropdown.less -->
           <li class="dropdown user user-menu">
             <a href="#" class="dropdown-toggle" data-toggle="dropdown">
-              <img src="../resource/css/dist/img/user2-160x160.jpg" class="user-image" alt="User Image">
+              <img src="/WebEntry/resource/css/dist/img/user2-160x160.jpg" class="user-image" alt="User Image">
               <span class="hidden-xs">user name</span>
             </a>
             <ul class="dropdown-menu">
               <!-- User image -->
               <li class="user-header">
-                <img src="../resource/css/dist/img/user2-160x160.jpg" class="img-circle" alt="User Image">
+                <img src="/WebEntry/resource/css/dist/img/user2-160x160.jpg" class="img-circle" alt="User Image">
 
                 <p>
                   Alexander Pierce - Web Developer
@@ -378,63 +378,189 @@
     <section class="content">
 		<div class="row">
 			<div class="box box-primary">
+				<%@ page language="java" import="hotfix.db.hotfixDbAkidOp" %>
+				<% 
+					hotfixDbAkidOp o_akid= (hotfixDbAkidOp)request.getAttribute("akid_obj");
+				
+				%>
 				<div class="box-header with-border">
-					<h3 class="box-title">AK ID</h3>
+					<h3 class="box-title"><%=o_akid.getakid()%></h3>
 				</div>
 				<!-- /.box-header -->
 				<div class="box-body">
-					<strong><i class="fa fa-book margin-r-5"></i> aone</strong>
-
-					<p class="text-muted">
-					B.S. in Computer Science from the University of Tennessee at Knoxville
-					</p>
-
-					<hr>
-
-					<strong><i class="fa fa-map-marker margin-r-5"></i>描述</strong>
-					<form class="form-horizontal">
-						<div class="input-group input-group-sm">
-								<input type="text" class="form-control">
-								<span class="input-group-btn">
-									<button type="button" class="btn btn-info btn-flat">Go!</button>
-								</span>
+					<div id="top">
+						<div class="form-group">
+							<strong><i class="margin-r-5"></i> aone</strong>
+							<button type="submit" class="btn btn-info pull-right editevent">edit</button>
 						</div>
+						<p class="text-muted">
+							<%=o_akid.getlink()%>
+						</p>
+						<form class="form-horizontal" style="display:none" id="aoneform">
+							<input type="text" class="form-control"  name="<%=o_akid.getakid()%>" value="<%=o_akid.getlink()%>">
+							<button type="button" class="btn btn-info btn-flat" id="akid_submit">提交</button>
+						</form>
+						<hr>
+					</div>
 
-					</form>
-					<p class="text-muted">Malibu, California</p>
 
-					<hr>
+					<div class="top">
+						<div class="form-group">
+							<strong><i class="fa fa-map-marker margin-r-5"></i>描述</strong>
+							<button type="submit" class="btn btn-info pull-right editevent">edit</button>
+						</div>
+						<p class="text-muted">Malibu, California</p>
+						<form class="form-horizontal" style="display:none">
+							<input type="text" class="form-control">
+							<button type="button" class="btn btn-info btn-flat" id="akid_submit">提交</button>
+						</form>
+						<hr>
+					</div>
 
-					<strong><i class="fa fa-pencil margin-r-5"></i>作者</strong>
 
-					<p>
-					<span class="label label-danger">UI Design</span>
-					<span class="label label-success">Coding</span>
-					<span class="label label-info">Javascript</span>
-					<span class="label label-warning">PHP</span>
-					<span class="label label-primary">Node.js</span>
-					</p>
-					<hr>
+					<div class="top">
+						<div class="form-group">
+							<strong><i class="fa fa-pencil margin-r-5"></i>作者</strong>
+							<button type="submit" class="btn btn-info pull-right editevent">edit</button>
+						</div>
+						<p class="text-muted">
+							<%=o_akid.getlink()%>
+						</p>
+						<form class="form-horizontal" style="display:none">
+							<div class="input-group input-group-sm">
+									<input type="text" class="form-control">
+									<span class="input-group-btn">
+										<button type="button" class="btn btn-info btn-flat" id="akid_submit">提交</button>
+									</span>
+							</div>
+						</form>
+						<hr>
+					</div>
 
-					<strong><i class="fa fa-file-text-o margin-r-5"></i> hotfix安装</strong>
-					<p>Lorem ipsum dolor sit amet, consectetur adipiscing elit. Etiam fermentum enim neque.</p>
-					<hr>
+					<div class="top">
+						<div class="form-group">
+							<strong><i class="fa fa-file-text-o margin-r-5"></i> 部署方式</strong>
+							<button type="submit" class="btn btn-info pull-right editevent">edit</button>
+						</div>
+							<p> 请严格按照灰度部署，部署节奏由业务团队自行把控</p>
+							<p> 建议方式：1台，5台，10台，50台，200台这样的节奏来进行，每次灰度之间要保留足够的观察期（如一周）</p>
+						<form class="form-horizontal" style="display:none">
+							<div class="input-group input-group-sm">
+									<input type="text" class="form-control">
+									<span class="input-group-btn">
+										<button type="button" class="btn btn-info btn-flat" id="akid_submit">提交</button>
+									</span>
+							</div>
+						</form>
+							<hr>
+					</div>
 
-					<strong><i class="fa fa-file-text-o margin-r-5"></i> hotfix卸载</strong>
-					<p>Lorem ipsum dolor sit amet, consectetur adipiscing elit. Etiam fermentum enim neque.</p>
-					<hr>
-					<strong><i class="fa fa-file-text-o margin-r-5"></i>测试</strong>
-					<p>Lorem ipsum dolor sit amet, consectetur adipiscing elit. Etiam fermentum enim neque.</p>
-					<hr>
-					<strong><i class="fa fa-file-text-o margin-r-5"></i>rpm包</strong>
-					<p>Lorem ipsum dolor sit amet, consectetur adipiscing elit. Etiam fermentum enim neque.</p>
-					<hr>
-					<strong><i class="fa fa-file-text-o margin-r-5"></i>修改函数</strong>
-					<p>Lorem ipsum dolor sit amet, consectetur adipiscing elit. Etiam fermentum enim neque.</p>
-	 				<hr>
-					<strong><i class="fa fa-file-text-o margin-r-5"></i>patch</strong>
-					<p>Lorem ipsum dolor sit amet, consectetur adipiscing elit. Etiam fermentum enim neque.</p>
-	 				<hr>
+					<div class="top">
+						<div class="form-group">
+							<strong><i class="fa fa-file-text-o margin-r-5"></i> 安装方式</strong>
+							<button type="submit" class="btn btn-info pull-right editevent">edit</button>
+						</div>
+							<p>安装前准备： 无
+							安装命令: 安装完成后，执行 khotfix-view -r 查看</p>
+						<form class="form-horizontal" style="display:none">
+							<div class="input-group input-group-sm">
+									<input type="text" class="form-control">
+									<span class="input-group-btn">
+										<button type="button" class="btn btn-info btn-flat" id="akid_submit">提交</button>
+									</span>
+							</div>
+						</form>
+						<hr>
+					</div>
+
+					<div class="top">
+						<div class="form-group">
+							<strong><i class="fa fa-file-text-o margin-r-5"></i> 卸载方式</strong>
+							<button type="submit" class="btn btn-info pull-right editevent">edit</button>
+						</div>
+							<p> 卸载rpm包即可</p>
+						<form class="form-horizontal" style="display:none">
+							<div class="input-group input-group-sm">
+									<input type="text" class="form-control">
+									<span class="input-group-btn">
+										<button type="button" class="btn btn-info btn-flat" id="akid_submit">提交</button>
+									</span>
+							</div>
+						</form>
+						<hr>
+					</div>
+
+					<div class="top">
+						<div class="form-group">
+							<strong><i class="fa fa-file-text-o margin-r-5"></i>功能测试</strong>
+							<button type="submit" class="btn btn-info pull-right editevent">edit</button>
+						</div>
+						<p>Lorem ipsum dolor sit amet, consectetur adipiscing elit. Etiam fermentum enim neque.</p>
+						<form class="form-horizontal" style="display:none">
+							<div class="input-group input-group-sm">
+									<input type="text" class="form-control">
+									<span class="input-group-btn">
+										<button type="button" class="btn btn-info btn-flat" id="akid_submit">提交</button>
+									</span>
+							</div>
+						</form>
+						<hr>
+					</div>
+
+					<div class="top">
+						<div class="form-group">
+							<strong><i class="fa fa-file-text-o margin-r-5"></i>rpm包</strong>
+							<button type="submit" class="btn btn-info pull-right editevent">edit</button>
+						</div>
+						<p>Lorem ipsum dolor sit amet, consectetur adipiscing elit. Etiam fermentum enim neque.</p>
+						<form class="form-horizontal" style="display:none" action="../hotfix_info_item_update">
+							<label class="control-label">yum rpm link</label>
+							<div class="input-group input-group-sm">
+									<input type="text" class="form-control">
+									<span class="input-group-btn">
+										<button type="button" class="btn btn-info btn-flat" id="akid_submit" name="rpm_append">提交</button>
+									</span>
+							</div>
+						</form>
+						<hr>
+					</div>
+
+					<div class="top">
+						<div class="form-group">
+							<strong><i class="fa fa-file-text-o margin-r-5"></i>修改函数</strong>
+							<button type="submit" class="btn btn-info pull-right editevent">edit</button>
+						</div>
+						<p>Lorem ipsum dolor sit amet, consectetur adipiscing elit. Etiam fermentum enim neque.</p>
+						<form class="form-horizontal" style="display:none">
+							<div class="input-group input-group-sm">
+									<input type="text" class="form-control">
+									<span class="input-group-btn">
+										<button type="button" class="btn btn-info btn-flat" id="akid_submit">提交</button>
+									</span>
+							</div>
+						</form>
+						<hr>
+					</div>
+
+					<div class="top">
+						<div class="form-group">
+							<strong><i class="fa fa-file-text-o margin-r-5"></i>patch</strong>
+							<button type="submit" class="btn btn-info pull-right editevent">edit</button>
+						</div>
+							<%
+							out.print("<a href=\"https://aone.alibaba-inc.com/code/"+o_akid.getakid()+"\">"+"https://aone.alibaba-inc.com/code/"+o_akid.getakid()+"</a>");
+							%>
+						<form class="form-horizontal" style="display:none">
+							<div class="input-group input-group-sm">
+									<input type="text" class="form-control">
+									<span class="input-group-btn">
+										<button type="button" class="btn btn-info btn-flat" id="akid_submit">提交</button>
+									</span>
+							</div>
+						</form>
+							<hr>
+					</div>
+					
 				</div>
 				<!-- /.box-body -->
 			</div>
@@ -648,7 +774,7 @@
 <!-- ./wrapper -->
 
 <!-- jQuery 2.2.0 -->
-<script src="../resource/css/plugins/jQuery/jQuery-2.2.0.min.js"></script>
+<script src="/WebEntry/resource/css/plugins/jQuery/jQuery-2.2.0.min.js"></script>
 <!-- jQuery UI 1.11.4 -->
 <script src="https://code.jquery.com/ui/1.11.4/jquery-ui.min.js"></script>
 <!-- Resolve conflict in jQuery UI tooltip with Bootstrap tooltip -->
@@ -656,68 +782,47 @@
   $.widget.bridge('uibutton', $.ui.button);
 </script>
 <!-- Bootstrap 3.3.6 -->
-<script src="../resource/css/bootstrap/js/bootstrap.min.js"></script>
+<script src="/WebEntry/resource/css/bootstrap/js/bootstrap.min.js"></script>
 <!-- Morris.js charts -->
 <script src="https://cdnjs.cloudflare.com/ajax/libs/raphael/2.1.0/raphael-min.js"></script>
-<!-- <script src="../resource/css/plugins/morris/morris.min.js"></script>-->
+<!-- <script src="/WebEntry/resource/css/plugins/morris/morris.min.js"></script>-->
 <!-- Sparkline -->
-<script src="../resource/css/plugins/sparkline/jquery.sparkline.min.js"></script>
+<script src="/WebEntry/resource/css/plugins/sparkline/jquery.sparkline.min.js"></script>
 <!-- jvectormap -->
-<script src="../resource/css/plugins/jvectormap/jquery-jvectormap-1.2.2.min.js"></script>
-<script src="../resource/css/plugins/jvectormap/jquery-jvectormap-world-mill-en.js"></script>
+<script src="/WebEntry/resource/css/plugins/jvectormap/jquery-jvectormap-1.2.2.min.js"></script>
+<script src="/WebEntry/resource/css/plugins/jvectormap/jquery-jvectormap-world-mill-en.js"></script>
 <!-- jQuery Knob Chart -->
-<script src="../resource/css/plugins/knob/jquery.knob.js"></script>
+<script src="/WebEntry/resource/css/plugins/knob/jquery.knob.js"></script>
 <!-- daterangepicker -->
 <script src="https://cdnjs.cloudflare.com/ajax/libs/moment.js/2.11.2/moment.min.js"></script>
-<script src="../resource/css/plugins/daterangepicker/daterangepicker.js"></script>
+<script src="/WebEntry/resource/css/plugins/daterangepicker/daterangepicker.js"></script>
 <!-- datepicker -->
-<script src="../resource/css/plugins/datepicker/bootstrap-datepicker.js"></script>
+<script src="/WebEntry/resource/css/plugins/datepicker/bootstrap-datepicker.js"></script>
 <!-- Bootstrap WYSIHTML5 -->
-<script src="../resource/css/plugins/bootstrap-wysihtml5/bootstrap3-wysihtml5.all.min.js"></script>
+<script src="/WebEntry/resource/css/plugins/bootstrap-wysihtml5/bootstrap3-wysihtml5.all.min.js"></script>
 <!-- Slimscroll -->
-<script src="../resource/css/plugins/slimScroll/jquery.slimscroll.min.js"></script>
+<script src="/WebEntry/resource/css/plugins/slimScroll/jquery.slimscroll.min.js"></script>
 <!-- FastClick -->
-<script src="../resource/css/plugins/fastclick/fastclick.js"></script>
+<script src="/WebEntry/resource/css/plugins/fastclick/fastclick.js"></script>
 <!-- AdminLTE App -->
-<script src="../resource/css/dist/js/app.min.js"></script>
+<script src="/WebEntry/resource/css/dist/js/app.min.js"></script>
 <!-- AdminLTE for demo purposes -->
-<script src="../resource/css/dist/js/demo.js"></script>
+<script src="/WebEntry/resource/css/dist/js/demo.js"></script>
 
 <script type="text/javascript">
     $(document).ready(function(){
-        $("[value=GETsubmit]").click(function(){
-        	var params = '';
-        	console.log($("[name=akid]").val())
-        	$('input:checkbox[name=version]:checked').each(function(k){
-        	    if(k == 0){
-        	    	params = "version="+$(this).parent().text();
-        	    }else{
-        	    	params += '&version='+$(this).parent().text();
-        	    }
-        	})
-        	
-			$.ajax({
-				type: "GET",
-				url: "../hotfix_ajaxservlet_mergetPatch?"+params+"&akid="+$("[name=akid]").val()+"&date="+new Date().getTime(),
-				dataType: "text",
-				success: function(data){
-					var status=""
-					var json = eval('('+data+')'); //数组
-	                $.each(json, function (index) {  
-	                    //循环获取数据    
-	                    
-	                  	if (json[index].status == "ok") {
-	                  		status += json[index].version+"(success) ";
-	                  	} else {
-	                  		status += json[index].version+"(failed) ";
-	                  	}
-	                });  
-					$("#show").html(status);
-				},
-				error: function(){
-					$("#show").html("Error XMLHttpRequest");
-				}
-			});
+		$(".editevent").click(function() {
+			console.log("1234")
+			if ($(this).parent().parent().children(".form-horizontal").is(":hidden")) {
+				$(this).parent().parent().children(".form-horizontal").show()
+			} else {
+				$(this).parent().parent().children(".form-horizontal").hide()
+			}
+			
+		});
+		$("#akid_submit").click(function() {
+			console.log("22")
+			$(this).parent(".form-horizontal").hide()
 		});
 	});
 </script>
