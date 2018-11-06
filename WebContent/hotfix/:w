@@ -381,24 +381,24 @@
 				<%@ page language="java" import="hotfix.db.hotfixDbAkidOp" %>
 				<% 
 					hotfixDbAkidOp o_akid= (hotfixDbAkidOp)request.getAttribute("akid_obj");
+				
 				%>
 				<div class="box-header with-border">
-					<h3 class="box-title" id="akid_title"><%=o_akid.getakid()%></h3>
+					<h3 class="box-title"><%=o_akid.getakid()%></h3>
 				</div>
 				<!-- /.box-header -->
 				<div class="box-body">
 					<div id="top">
 						<div class="form-group">
-							<strong style="display:none">aone_link</strong>
-							<strong>aone</strong>
+							<strong><i class="margin-r-5"></i> aone</strong>
 							<button type="submit" class="btn btn-info pull-right editevent">edit</button>
 						</div>
 						<p class="text-muted">
 							<%=o_akid.getlink()%>
 						</p>
 						<form class="form-horizontal" style="display:none" id="aoneform">
-							<input type="text" class="form-control"  id="akid_aone" name="<%=o_akid.getakid()%>" value="<%=o_akid.getlink()%>">
-							<button type="button" class="btn btn-info btn-flat akid_submit">提交</button>
+							<input type="text" class="form-control"  name="<%=o_akid.getakid()%>" value="<%=o_akid.getlink()%>">
+							<button type="button" class="btn btn-info btn-flat" id="akid_submit">提交</button>
 						</form>
 						<hr>
 					</div>
@@ -406,14 +406,13 @@
 
 					<div class="top">
 						<div class="form-group">
-							<strong style="display:none">description</strong>
-							<strong>描述</strong>
+							<strong><i class="fa fa-map-marker margin-r-5"></i>描述</strong>
 							<button type="submit" class="btn btn-info pull-right editevent">edit</button>
 						</div>
 						<p class="text-muted">Malibu, California</p>
 						<form class="form-horizontal" style="display:none">
-							<input type="text" class="form-control" id="akid_desc">
-							<button type="button" class="btn btn-info btn-flat akid_submit">提交</button>
+							<input type="text" class="form-control">
+							<button type="button" class="btn btn-info btn-flat" id="akid_submit">提交</button>
 						</form>
 						<hr>
 					</div>
@@ -421,74 +420,89 @@
 
 					<div class="top">
 						<div class="form-group">
-							<strong style="display:none">author</strong>
-							<strong>作者</strong>
+							<strong><i class="fa fa-pencil margin-r-5"></i>作者</strong>
 							<button type="submit" class="btn btn-info pull-right editevent">edit</button>
 						</div>
-						<p class="text-muted" id="akid_author">
+						<p class="text-muted">
 							<%=o_akid.getlink()%>
 						</p>
 						<form class="form-horizontal" style="display:none">
-							<input type="text" class="form-control">
-							<button type="button" class="btn btn-info btn-flat akid_submit">提交</button>
+							<div class="input-group input-group-sm">
+									<input type="text" class="form-control">
+									<span class="input-group-btn">
+										<button type="button" class="btn btn-info btn-flat" id="akid_submit">提交</button>
+									</span>
+							</div>
 						</form>
 						<hr>
 					</div>
 
 					<div class="top">
 						<div class="form-group">
-							<strong style="display:none">dispose</strong>
-							<strong>部署方式</strong>
+							<strong><i class="fa fa-file-text-o margin-r-5"></i> 部署方式</strong>
 							<button type="submit" class="btn btn-info pull-right editevent">edit</button>
 						</div>
 							<p> 请严格按照灰度部署，部署节奏由业务团队自行把控</p>
 							<p> 建议方式：1台，5台，10台，50台，200台这样的节奏来进行，每次灰度之间要保留足够的观察期（如一周）</p>
 						<form class="form-horizontal" style="display:none">
-							<input type="text" class="form-control">
-							<button type="button" class="btn btn-info btn-flat akid_submit">提交</button>
+							<div class="input-group input-group-sm">
+									<input type="text" class="form-control">
+									<span class="input-group-btn">
+										<button type="button" class="btn btn-info btn-flat" id="akid_submit">提交</button>
+									</span>
+							</div>
 						</form>
 							<hr>
 					</div>
 
 					<div class="top">
 						<div class="form-group">
-							<strong style="display:none">install</strong>
-							<strong>安装方式</strong>
+							<strong><i class="fa fa-file-text-o margin-r-5"></i> 安装方式</strong>
 							<button type="submit" class="btn btn-info pull-right editevent">edit</button>
 						</div>
 							<p>安装前准备： 无
 							安装命令: 安装完成后，执行 khotfix-view -r 查看</p>
 						<form class="form-horizontal" style="display:none">
-							<input type="text" class="form-control">
-							<button type="button" class="btn btn-info btn-flat akid_submit">提交</button>
+							<div class="input-group input-group-sm">
+									<input type="text" class="form-control">
+									<span class="input-group-btn">
+										<button type="button" class="btn btn-info btn-flat" id="akid_submit">提交</button>
+									</span>
+							</div>
 						</form>
 						<hr>
 					</div>
 
 					<div class="top">
 						<div class="form-group">
-							<strong stycle="display:none">unstall</strong>
-							<strong>卸载方式</strong>
+							<strong><i class="fa fa-file-text-o margin-r-5"></i> 卸载方式</strong>
 							<button type="submit" class="btn btn-info pull-right editevent">edit</button>
 						</div>
 							<p> 卸载rpm包即可</p>
 						<form class="form-horizontal" style="display:none">
-							<input type="text" class="form-control">
-							<button type="button" class="btn btn-info btn-flat akid_submit">提交</button>
+							<div class="input-group input-group-sm">
+									<input type="text" class="form-control">
+									<span class="input-group-btn">
+										<button type="button" class="btn btn-info btn-flat" id="akid_submit">提交</button>
+									</span>
+							</div>
 						</form>
 						<hr>
 					</div>
 
 					<div class="top">
 						<div class="form-group">
-							<strong stycle="display:none">functest</strong>
-							<strong>功能测试</strong>
+							<strong><i class="fa fa-file-text-o margin-r-5"></i>功能测试</strong>
 							<button type="submit" class="btn btn-info pull-right editevent">edit</button>
 						</div>
 						<p>Lorem ipsum dolor sit amet, consectetur adipiscing elit. Etiam fermentum enim neque.</p>
 						<form class="form-horizontal" style="display:none">
-							<input type="text" class="form-control" id="akid_test">
-							<button type="button" class="btn btn-info btn-flat akid_submit">提交</button>
+							<div class="input-group input-group-sm">
+									<input type="text" class="form-control">
+									<span class="input-group-btn">
+										<button type="button" class="btn btn-info btn-flat" id="akid_submit">提交</button>
+									</span>
+							</div>
 						</form>
 						<hr>
 					</div>
@@ -500,58 +514,64 @@
 						</div>
 						<p>Lorem ipsum dolor sit amet, consectetur adipiscing elit. Etiam fermentum enim neque.</p>
 						<div class="box">
+							<!-- /.box-header -->
 							<div class="box-body no-padding">
-								<table class="table table-condensed" id="rpmtable">
-									<tr>
-									  <td>ali2016</td>
-									  <td><span class="badge"><a href="">kernel-hotfix-D616841-ali2016-1.0-1.alios7.x86_64.rpm</a> </span></td>
-									</tr>
-									<tr>
-									  <td>ali2017</td>
-									  <td><span class="badge"><a href="">kernel-hotfix-D616841-ali2016-1.0-1.alios7.x86_64.rpm</a> </span></td>
-									</tr>
-								</table>
+								<tr>
+								  <td>ali2016</td>
+								  <td><span class="badge bg-red">55%</span></td>
+								</tr>
 							</div>
 						<!-- /.box-body -->
 						</div>
 
 						<form class="form-horizontal" style="display:none" action="../hotfix_info_item_update">
 							<label class="control-label">yum rpm link</label>
-							<input type="text" class="form-control" id="akid_rpm">
-							<button type="button" class="btn btn-info btn-flat " name="rpm_append" onclick="updateRpm">更新</button>
+							<div class="input-group input-group-sm">
+									<input type="text" class="form-control">
+									<span class="input-group-btn">
+										<button type="button" class="btn btn-info btn-flat akid_submit" name="rpm_append">提交</button>
+									</span>
+							</div>
 						</form>
 						<hr>
 					</div>
 
 					<div class="top">
 						<div class="form-group">
-							<strong stycle="display:none">modify_func</strong>
-							<strong>修改函数</strong>
+							<strong><i class="fa fa-file-text-o margin-r-5"></i>修改函数</strong>
 							<button type="submit" class="btn btn-info pull-right editevent">edit</button>
 						</div>
 						<p>Lorem ipsum dolor sit amet, consectetur adipiscing elit. Etiam fermentum enim neque.</p>
 						<form class="form-horizontal" style="display:none">
-							<input type="text" class="form-control" id="akid_func_mod">
-							<button type="button" class="btn btn-info btn-flat akid_submit">提交</button>
+							<div class="input-group input-group-sm">
+									<input type="text" class="form-control">
+									<span class="input-group-btn">
+										<button type="button" class="btn btn-info btn-flat" id="akid_submit">提交</button>
+									</span>
+							</div>
 						</form>
 						<hr>
 					</div>
 
 					<div class="top">
 						<div class="form-group">
-							<strong stycle="display:none">patchlink</strong>
-							<strong>patch</strong>
+							<strong><i class="fa fa-file-text-o margin-r-5"></i>patch</strong>
 							<button type="submit" class="btn btn-info pull-right editevent">edit</button>
 						</div>
 							<%
 							out.print("<a href=\"https://aone.alibaba-inc.com/code/"+o_akid.getakid()+"\">"+"https://aone.alibaba-inc.com/code/"+o_akid.getakid()+"</a>");
 							%>
 						<form class="form-horizontal" style="display:none">
-							<input type="text" class="form-control" id="akid_code">
-							<button type="button" class="btn btn-info btn-flat akid_submit">提交</button>
+							<div class="input-group input-group-sm">
+									<input type="text" class="form-control">
+									<span class="input-group-btn">
+										<button type="button" class="btn btn-info btn-flat" id="akid_submit">提交</button>
+									</span>
+							</div>
 						</form>
-						<hr>
+							<hr>
 					</div>
+					
 				</div>
 				<!-- /.box-body -->
 			</div>
@@ -812,41 +832,10 @@
 			
 		});
 		$(".akid_submit").click(function() {
-			akid_val=$("#akid_title").text()
-			akid_item = $(this).parent().parent().children("div").children("strong:first").text();
-			console.log($(this).parent().children("input").val())
-			console.log(akid_val)
-			console.log(akid_item)
-			input_val = $(this).parent().children("input").val();
-			if (input_val == "")
-				return
-			$.ajax({
-                type: "GET",
-				url: "hotfix_db_akid_show_update?akid="+akid_val+"&"+akid_item+"="+input_val,
-                dataType: "text",
-                success: function(data){
-                    if(data=="true"){
-                        $("#show").html("===ok==="+"<br/>"+"name="+$("[name=name]").val()+"<br/>"+"pwd="+$("[name=pwd]").val());
-                    }else if(data=="false"){
-                        $("#show").html("==信息不符合==");
-                    }
-                },
-                error: function(){
-                    $("#show").html("Error XMLHttpRequest");
-                }
-            });
-			$(this).parent().hide()
-		});
-		$(".rpm_submit").click(function() {
+			console.log("22")
 			console.log($(this).attr("name"))
 			$(this).parent().parent().parent().hide()
 		});
-
-		function updateRpm(){
-			var rowTem ='<tr><td></td><td><span class="badge"><a href=""></a> </span></td></tr>'
-			console.log("updateRpm")
-			$("#rpmtable tbody:last").append(rowTem);
-		}
 	});
 </script>
 

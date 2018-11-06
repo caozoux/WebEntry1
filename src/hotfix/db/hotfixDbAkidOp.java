@@ -133,6 +133,9 @@ public class hotfixDbAkidOp {
 	            id  = rs.getInt("id");
 	            name = rs.getString("ak_id");
 	            url = rs.getString("link");
+	            this.setlink(url);
+	            System.out.print(id+name+url);
+	            
 	        } else {
 	        	System.out.println("find failed"+akid_val);
 	        }

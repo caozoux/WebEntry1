@@ -29,8 +29,9 @@ public class hotfix_akid_show extends HttpServlet {
 
     public void hotfix_akid_set(HttpServletRequest request) {
     	hotfixDbAkidOp o_akid= new hotfixDbAkidOp();
-    	o_akid.setakid("D12345");
-    	o_akid.setlink("www.baidu.com");
+    	o_akid.setakid("D728868");
+    	//o_akid.setlink("www.baidu.com");
+    	o_akid.get_akid_info("D728868");
     	request.setAttribute("akid_obj", o_akid);
     }
 	/**
