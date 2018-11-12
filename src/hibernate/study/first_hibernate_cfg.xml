@@ -1,0 +1,34 @@
+<?xml version="1.0" encoding="UTF-8"?>
+  <!DOCTYPE hibernate-mapping PUBLIC 
+       "-//Hibernate/Hibernate Mapping DTD 3.0//EN"
+       "http://www.hibernate.org/dtd/hibernate-mapping-3.0.dtd">
+  <hibernate-mapping>
+      <!-- name代表的是实体类名，table代表的是表名 -->
+    <class name="hibernate.study.first_hibernate_custom" table="study">
+        <!-- 主键 -->
+        <id name="sid" type="int">
+            <column name="SID" />
+            <generator class="assigned" />
+        </id>
+        
+        <!-- 字段 -->
+        <property name="sname" type="java.lang.String">
+            <column name="SNAME" />
+        </property>
+        
+        <!-- 字段 -->
+        <property name="gender" type="java.lang.String">
+            <column name="GENDER" />
+        </property>
+        
+        <!-- 字段 -->
+        <property name="birthday" type="java.util.Date">
+            <column name="BIRTHDAY" />
+        </property>
+        
+        <!-- 字段 -->
+        <property name="address" type="java.lang.String">
+            <column name="ADDRESS" />
+        </property>
+    </class>
+  </hibernate-mapping>
