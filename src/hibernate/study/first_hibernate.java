@@ -34,7 +34,14 @@ public class first_hibernate {
 		    {   
 		      //5.操作
 		     // first_hibernate_custom customer=new first_hibernate_custom();
-		      first_hibernate_custom customer = new first_hibernate_custom(1,"张三","男",new Date(),"武当山");
+	
+		      first_hibernate_custom customer=new first_hibernate_custom();
+		      customer.setId(1);
+		      customer.setName("zhangsan");
+		      customer.setAge(20);
+		      customer.setSex("m");
+		      customer.setCity("guangzhou");
+		      session.save(customer);
 		      //customer.setSname("a1");
 		      //customer.setAddress("address1");
 		      session.saveOrUpdate(customer);

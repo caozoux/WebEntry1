@@ -32,7 +32,7 @@ public class first_hibernate_servlet extends HttpServlet {
 		test_hi.setUp();
 		test_hi.insert();
 		//test_hi.update();
-		//test_hi.closeTransaction();
+		test_hi.closeTransaction();
 		response.getWriter().append("Served at: ").append(request.getContextPath());
 	}
 

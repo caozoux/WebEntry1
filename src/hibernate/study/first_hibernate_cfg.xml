@@ -1,34 +1,18 @@
-<?xml version="1.0" encoding="UTF-8"?>
-  <!DOCTYPE hibernate-mapping PUBLIC 
-       "-//Hibernate/Hibernate Mapping DTD 3.0//EN"
-       "http://www.hibernate.org/dtd/hibernate-mapping-3.0.dtd">
-  <hibernate-mapping>
-      <!-- name代表的是实体类名，table代表的是表名 -->
+<?xml version="1.0"?>
+<!DOCTYPE hibernate-mapping PUBLIC "-//Hibernate/Hibernate Mapping DTD 3.0//EN"
+"http://hibernate.sourceforge.net/hibernate-mapping-3.0.dtd">
+<hibernate-mapping>
+    <!-- JavaBean与对应的表名 -->
     <class name="hibernate.study.first_hibernate_custom" table="study">
-        <!-- 主键 -->
-        <id name="sid" type="int">
-            <column name="SID" />
-            <generator class="assigned" />
-        </id>
-        
-        <!-- 字段 -->
-        <property name="sname" type="java.lang.String">
-            <column name="SNAME" />
-        </property>
-        
-        <!-- 字段 -->
-        <property name="gender" type="java.lang.String">
-            <column name="GENDER" />
-        </property>
-        
-        <!-- 字段 -->
-        <property name="birthday" type="java.util.Date">
-            <column name="BIRTHDAY" />
-        </property>
-        
-        <!-- 字段 -->
-        <property name="address" type="java.lang.String">
-            <column name="ADDRESS" />
-        </property>
+          <!-- name=id代表的是customer类中属性  column=id代表的是table表中的字段 -->
+          <id name="id" column="id">
+             <!-- 主键生成策略 -->
+             <generator class="native"/>
+          </id>
+          <!-- 其他属性使用property标签来映射 -->
+          <property name="name" column="name" type="string"/>
+          <property name="age"  column="age"  type="integer"/>
+          <property name="sex"  column="sex"  type="string"/>
+          <property name="city" column="city" type="string"/>
     </class>
-  </hibernate-mapping>
+</hibernate-mapping>
