@@ -322,32 +322,23 @@
     <!-- Main content -->
     <section class="content">
 		<div class="row">
-			<a href="/twitter-bootstrap/" class="package list-group-item" target="_blank" onclick="_hmt.push(['_trackEvent', 'packages', 'click', 'twitter-bootstrap'])">
-				<div class="row">
-					<div class="col-md-3">
-						<h4 class="package-name">twitter-bootstrap</h4>
-					</div>
-					<div class="col-md-9 hidden-xs">
-						<p class="package-description">Bootstrap 是全球最受欢迎的前端组件库，用于开发响应式布局、移动设备优先的 WEB 项目。</p>
-					</div>
-					<div class="package-extra-info col-md-9 col-md-offset-3 col-xs-12">
-					</div>
-				</div>
-			</a>
 			<%@ page language="java" import="java.util.List" %>
+			<%@ page language="java" import="hotfix.db.hitfix_rpminfo_bean" %>
 			<% 
-				List<String> list=(List<String>)request.getAttribute("akid_list");
-				for(String str : list) {
-					out.print("<a href='/twitter-bootstrap/' class='package list-group-item' target='_blank' onclick='_hmt.push(['_trackEvent', 'packages', 'click', 'twitter-bootstrap'])'>");
+				List<hitfix_rpminfo_bean> list=(List<hitfix_rpminfo_bean>)request.getAttribute("akid_list");
+				for(hitfix_rpminfo_bean rpminfo_bean : list) {
+					out.print("<a href='./hotfix_akid_show?akid="+rpminfo_bean.getAkid()+"'"+" class='package list-group-item' target='_blank' onclick='_hmt.push(['_trackEvent', 'packages', 'click', 'twitter-bootstrap'])'>");
 					out.print("<div class='row'>");
 					out.print("<div class='col-md-3'>");
-					out.print("<h4 class='package-name'>"+str+"</h4>");
+					out.print("<h4 class='package-name'>"+rpminfo_bean.getAkid()+"</h4>");
 					out.print("</div>");
 					out.print("<div class='col-md-9 hidden-xs'>");
-					out.print("<p class='package-description'>Bootstrap 是全球最受欢迎的前端组件库，用于开发响应式布局、移动设备优先的 WEB 项目。</p>");
+					out.print("<p class='package-description'>"+rpminfo_bean.getSummary()+"</p>");
 					out.print("</div>");
 					out.print("<div class='package-extra-info col-md-9 col-md-offset-3 col-xs-12'>");
-					out.print("</div></div></div>");
+					out.print("</div>");
+					out.print("</div>");
+					out.print("</a>");
 				}
 			%>
 		</div>

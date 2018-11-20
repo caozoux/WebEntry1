@@ -11,7 +11,9 @@ import javax.servlet.http.HttpServlet;
 import javax.servlet.http.HttpServletRequest;
 import javax.servlet.http.HttpServletResponse;
 
+import hotfix.db.hitfix_rpminfo_bean;
 import hotfix.db.hotfixDbAkidFinder;
+import hotfix.db.hotfix_hibernate_hotfixrpminfo;
 
 /**
  * Servlet implementation class hotfix_servlet_listshow
@@ -32,22 +34,24 @@ public class hotfix_servlet_listshow extends HttpServlet {
 	 * @see HttpServlet#doGet(HttpServletRequest request, HttpServletResponse response)
 	 */
 	protected void doGet(HttpServletRequest request, HttpServletResponse response) throws ServletException, IOException {
-		// TODO Auto-generated method stub
-		// TODO Auto-generated method stub
-		//response.getWriter().append("Served at: ").append(request.getContextPath());
+	    RequestDispatcher rd = null;
+	    ServletContext sc = getServletContext();
+	    rd = sc.getRequestDispatcher("/hotfix/hotfix_show_list.jsp");
+		/*
 		hotfixDbAkidFinder finder = new hotfixDbAkidFinder();
 		List<String> list;
 		
 		response.setContentType("text/html;charset=UTF-8");
-		 
-	    ServletContext sc = getServletContext();
-	    RequestDispatcher rd = null;
-	    rd = sc.getRequestDispatcher("/hotfix/hotfix_show_list.jsp");
 	    list = finder.getAllAkid();
 	    if (!list.isEmpty()) {
 	    	request.setAttribute("akid_list", list);
 	    }
-	    
+	    */
+		hotfix_hibernate_hotfixrpminfo hiber_rpminfo = hotfix_hibernate_hotfixrpminfo.getFactoryObj();
+		List<hitfix_rpminfo_bean> list =  hiber_rpminfo.selectAll();
+		if (!list.isEmpty()) {
+			request.setAttribute("akid_list", list);
+		}
 	    rd.forward(request, response);
 	}
 

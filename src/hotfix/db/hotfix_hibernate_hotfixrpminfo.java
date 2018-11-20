@@ -66,6 +66,30 @@ public class hotfix_hibernate_hotfixrpminfo {
 	        //session.delete(customer);
 	     }
      
+	   //查询操作
+		 public List<hitfix_rpminfo_bean> selectAll()
+		 {
+		    	Transaction transaction;
+			    Session session;
+			    
+			    session=sessionFactory.openSession();
+			    transaction=session.beginTransaction();
+		 
+		    	Query q=session.createQuery("from hitfix_rpminfo_bean");
+		    	List<hitfix_rpminfo_bean> list=q.list();
+		    	
+		    	if (list.isEmpty()) {
+		    		transaction.commit();
+		    		session.close();
+		    		return null;
+		    	}
+		    		
+		    	//System.out.println(list.size());
+		    	transaction.commit();
+		    	session.close();
+		    	return list;
+		    }
+		    
 	    //查询操作
 	    public hitfix_rpminfo_bean select(String akid)
 	    {
