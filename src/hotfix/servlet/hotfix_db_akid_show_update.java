@@ -11,7 +11,9 @@ import javax.servlet.http.HttpServlet;
 import javax.servlet.http.HttpServletRequest;
 import javax.servlet.http.HttpServletResponse;
 
+import hotfix.db.hitfix_rpminfo_bean;
 import hotfix.db.hotfixDbAkidOp;
+import hotfix.db.hotfix_hibernate_hotfixrpminfo;
 
 /**
  * Servlet implementation class hotfix_db_akid_show_update
@@ -54,10 +56,12 @@ public class hotfix_db_akid_show_update extends HttpServlet {
 	 	Iterator<Map.Entry<String, String[]>> it = mapstr.entrySet().iterator();
 	 	akid_str=mapstr.get("akid")[0];
 	 	
-	 	hotfixDbAkidOp o_akid= new hotfixDbAkidOp();
+	 	/*hotfixDbAkidOp o_akid= new hotfixDbAkidOp();
 	 	o_akid.setakid(akid_str);
 	 	o_akid.get_akid_info(akid_str);
-	
+		*/
+	 	hitfix_rpminfo_bean o_akid = new hitfix_rpminfo_bean();
+	 	
 	 	while (it.hasNext()) {
 	 		Map.Entry<String, String[]> entry = it.next(); 
 	 		String key = entry.getKey();
@@ -65,24 +69,27 @@ public class hotfix_db_akid_show_update extends HttpServlet {
 	 		System.out.println("key= " + key+ " and value= " + value[0]); 
 	 		switch(key) {
 	 			case "link":
-	 				o_akid.setaone_link(value[0]);
+	 				o_akid.setLink(value[0]);
 	 				break;
 	 			case "description":
-	 				o_akid.setdescription(value[0]);
+	 				o_akid.setDescription(value[0]);
 	 				break;
 	 			case "author":
-	 				o_akid.setautor(value[0]);
+	 				o_akid.setAuthor(value[0]);
 	 				break;
 	 			case "functest":
-	 				o_akid.setfunctest(value[0]);
+	 				o_akid.setFunctest(value[0]);
 	 				break;
 	 			case "patchlink":
-	 				o_akid.setpatch_link(value[0]);
+	 				o_akid.setPatchlink(value[0]);
 	 				break;	
 	 			default:
 	 				break;
 	 		}
-	 		o_akid.insert_into_db();
+	 		
+	 		hotfix_hibernate_hotfixrpminfo hiber_rpminfo = hotfix_hibernate_hotfixrpminfo.getFactoryObj();
+	 		//hiber_rpminfo.insert(o_akid);
+	 		//o_akid.insert_into_db();
 	 	}
 	}
 

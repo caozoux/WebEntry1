@@ -14,7 +14,7 @@ import java.util.List;
 public class hotfixDbAkidFinder {
 	 // JDBC 驱动名及数据库 URL
     String JDBC_DRIVER = "com.mysql.jdbc.Driver";
-    String DB_URL = "jdbc:mysql://localhost/khotfix_test";
+    String DB_URL = "jdbc:mysql://localhost/khotfix_test?useSSL=false";
  
     // 数据库的用户名与密码，需要根据自己的设置
     String USER = "root";
@@ -37,10 +37,10 @@ public class hotfixDbAkidFinder {
 				str_list.add(str);
 			}
 
-			PreparedStatement ps = conn.prepareStatement(sql);
+			//PreparedStatement ps = conn.prepareStatement(sql);
 			
-			ps.executeUpdate();
-			ps.close();
+			//ps.executeUpdate();
+			//ps.close();
 
 			this.disconnect_bd();
 		}catch(SQLException se){

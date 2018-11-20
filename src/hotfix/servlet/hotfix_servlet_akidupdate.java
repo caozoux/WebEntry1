@@ -9,7 +9,10 @@ import javax.servlet.http.HttpServlet;
 import javax.servlet.http.HttpServletRequest;
 import javax.servlet.http.HttpServletResponse;
 
+import hotfix.db.hitfix_rpminfo_bean;
 import hotfix.db.hotfixDbAkidOp;
+import hotfix.db.hotfix_hibernate_hotfixrpminfo;
+import hotfix.db.hotfix_test_bean;
 import net.sf.json.JSONArray;
 
 /**
@@ -33,9 +36,8 @@ public class hotfix_servlet_akidupdate extends HttpServlet {
 	protected void doGet(HttpServletRequest request, HttpServletResponse response) throws ServletException, IOException {
 		// TODO Auto-generated method stub
 	    PrintWriter out = response.getWriter();
-	    hotfixDbAkidOp dbop=new hotfixDbAkidOp();
+	    
 
-   
 		String akid;
 		String Aone;
 		String desc;
@@ -44,24 +46,30 @@ public class hotfix_servlet_akidupdate extends HttpServlet {
 		String summary;
 
 		akid = request.getParameter("akid");
-		Aone = request.getParameter("Aone");
-		desc = request.getParameter("desc");
+		Aone = request.getParameter("aone");
+		desc = request.getParameter("description");
 		author = request.getParameter("author");
 		wiki_link = request.getParameter("wiki_link");
 		summary = request.getParameter("summary");
+	
+	 	hitfix_rpminfo_bean o_akid;
 
-		
-		dbop.setakid(akid);
-		dbop.setsummary(summary);
-		dbop.setaone_link(Aone);
-		dbop.setdescription(desc);
-		dbop.setautor(author);
-		dbop.setlink(wiki_link);
-		
-		System.out.print(dbop.getakid()+dbop.getlink());
-		dbop.insert_into_db();
-		
-		response.getWriter().append("Served at: ").append(request.getContextPath());
+ 		hotfix_hibernate_hotfixrpminfo hiber_rpminfo = hotfix_hibernate_hotfixrpminfo.getFactoryObj();
+
+ 		o_akid=hiber_rpminfo.select(akid);
+ 		if (o_akid == null) {
+ 			o_akid= new hitfix_rpminfo_bean();
+ 			o_akid.setAkid(akid);
+ 			o_akid.setAonelink(Aone);
+ 			o_akid.setDescription(desc);
+ 			o_akid.setAuthor(author);
+ 			o_akid.setLink(wiki_link);
+ 			o_akid.setSummary(summary);
+ 			hiber_rpminfo.insert(o_akid);
+ 			response.sendRedirect("hotfix_servlet_listshow");
+ 		} else {
+ 			response.getWriter().append("akid "+akid+" is exist").append(request.getContextPath());
+ 		}
 	}
 
 	/**

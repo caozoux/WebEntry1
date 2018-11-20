@@ -41,14 +41,15 @@
             <column name="functest" />
         </property>
                 
-        <!-- 字段 -->
+         <!-- 字段 -->
         <property name="patchlink" type="java.lang.String">
             <column name="patchlink" />
         </property>
                 
-        <!-- 字段 -->
+         <!-- 字段 -->
         <property name="aonelink" type="java.lang.String">
             <column name="aonelink" />
-        </property>  
+        </property>
+          
     </class>
   </hibernate-mapping>
