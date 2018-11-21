@@ -4,7 +4,7 @@
        "http://www.hibernate.org/dtd/hibernate-mapping-3.0.dtd">
   <hibernate-mapping>
       <!-- name代表的是实体类名，table代表的是表名 -->
-    <class name="hotfix.db.hitfix_rpminfo_bean" table="khotfix_debug">
+    <class name="hotfix.db.hotfix_rpmpackage_bean" table="rpmpackages_debug">
         <!-- 主键 -->
         <id name="id" type="int">
             <column name="id" />
@@ -17,38 +17,24 @@
         </property>
         
       	<!-- 字段 -->
-        <property name="link" type="java.lang.String">
-            <column name="link" />
+        <property name="kernel" type="java.lang.String">
+            <column name="kernel" />
         </property>
         
         <!-- 字段 -->
-        <property name="summary" type="java.lang.String">
-            <column name="summary" />
+        <property name="rpmname" type="java.lang.String">
+            <column name="rpmname" />
         </property>
         
          <!-- 字段 -->
-        <property name="description" type="java.lang.String">
-            <column name="description" />
+        <property name="downlink" type="java.lang.String">
+            <column name="downlink" />
         </property>
         
          <!-- 字段 -->
-        <property name="author" type="java.lang.String">
-            <column name="author" />
+        <property name="testlink" type="java.lang.String">
+            <column name="testlink" />
         </property>
-        
-         <!-- 字段 -->
-        <property name="functest" type="java.lang.String">
-            <column name="functest" />
-        </property>
-                
-        <!-- 字段 -->
-        <property name="patchlink" type="java.lang.String">
-            <column name="patchlink" />
-        </property>
-                
-        <!-- 字段 -->
-        <property name="aonelink" type="java.lang.String">
-            <column name="aonelink" />
-        </property>  
+    
     </class>
   </hibernate-mapping>

@@ -9,9 +9,7 @@ import org.hibernate.cfg.Configuration;
 import org.hibernate.query.Query;
 import org.hibernate.service.ServiceRegistry;
 
-import hibernate.study.first_hibernate_custom;
-
-public class hotfix_hibernate_hotfixrpminfo {
+public class hotfix_hibernate_rpmpackage {
 
 	    //定义变量
 	    Configuration config;
@@ -19,11 +17,11 @@ public class hotfix_hibernate_hotfixrpminfo {
 	    //Session session;
 	    //Transaction transaction;
 	    //before表示在方法执行前执行
-	    static public hotfix_hibernate_hotfixrpminfo mFacObj;
-	    static public hotfix_hibernate_hotfixrpminfo getFactoryObj()
+	    static public hotfix_hibernate_rpmpackage mFacObj;
+	    static public hotfix_hibernate_rpmpackage getFactoryObj()
 	    {
 	    	if (mFacObj==null) {
-	    		mFacObj = new  hotfix_hibernate_hotfixrpminfo();
+	    		mFacObj = new  hotfix_hibernate_rpmpackage();
 	    		mFacObj.setUp();
 	    	}
 	    	return mFacObj;
@@ -32,20 +30,12 @@ public class hotfix_hibernate_hotfixrpminfo {
 	    public void setUp()
 	    {
 	      //1.加载hibernate.cfg.xml配置
-	      config=new Configuration().configure("./hotfix/db/hotfix_hibernate.cfg2.xml");
-	      //config=new Configuration().configure("./hotfix/db/hotfix_test.cfg2.xml");
-	      //2.获取SessionFactory
+	      config=new Configuration().configure("./hotfix/db/hotfix_hibernate_rpmpackage.cfg.xml");
 	      sessionFactory=config.buildSessionFactory(); 
-	     //3.获得一个session
-	      //session=sessionFactory.openSession();
-	      //session=sessionFactory.getCurrentSession();
-	      //4.开始事务
-	      //transaction=session.beginTransaction();
-	      System.out.print("setup");
 	    }
 	    //添加操作
 	    
-	    public void insert(hitfix_rpminfo_bean item)
+	    public void insert(hotfix_rpmpackage_bean item)
 	    { 
 		    Session session;
 		    Transaction transaction;
@@ -67,7 +57,7 @@ public class hotfix_hibernate_hotfixrpminfo {
 	     }
      
 	   //查询操作
-		 public List<hitfix_rpminfo_bean> selectAll()
+		 public List<hotfix_rpmpackage_bean> selectAll()
 		 {
 		    	Transaction transaction;
 			    Session session;
@@ -76,7 +66,7 @@ public class hotfix_hibernate_hotfixrpminfo {
 			    transaction=session.beginTransaction();
 		 
 		    	Query q=session.createQuery("from hitfix_rpminfo_bean");
-		    	List<hitfix_rpminfo_bean> list=q.list();
+		    	List<hotfix_rpmpackage_bean> list=q.list();
 		    	
 		    	if (list.isEmpty()) {
 		    		transaction.commit();
@@ -91,26 +81,19 @@ public class hotfix_hibernate_hotfixrpminfo {
 		    }
 		    
 	    //查询操作
-	    public hitfix_rpminfo_bean select(String akid)
+	    public List<hotfix_rpmpackage_bean>  select(String akid)
 	    {
-	    	
-	    	//hitfix_rpminfo_bean u=(hitfix_rpminfo_bean)session.load(hitfix_rpminfo_bean.class, 7);
-	    	//System.out.println(u);
-	    	
-	    	//Query q=session.createQuery("from hitfix_rpminfo_bean");
-	    	//List<hitfix_rpminfo_bean> list=q.list();
-	    	//System.out.println(list.size());
 	    	Transaction transaction;
 		    Session session;
 		    
 		    session=sessionFactory.openSession();
 		    transaction=session.beginTransaction();
-	    	hitfix_rpminfo_bean rpminfo = new hitfix_rpminfo_bean();
+		    hotfix_rpmpackage_bean rpminfo = new hotfix_rpmpackage_bean();
 	    	
 	    	//transaction.begin();
 	    	System.out.print(akid);
-	    	Query q=session.createQuery("from hitfix_rpminfo_bean rpminfo where rpminfo.akid=:name").setParameter("name", akid);
-	    	List<hitfix_rpminfo_bean> list=q.list();
+	    	Query q=session.createQuery("from hotfix_rpmpackage_bean rpminfo where rpminfo.akid=:name").setParameter("name", akid);
+	    	List<hotfix_rpmpackage_bean> list=q.list();
 	    	
 	    	if (list.isEmpty()) {
 	    		transaction.commit();
@@ -121,7 +104,7 @@ public class hotfix_hibernate_hotfixrpminfo {
 	    	//System.out.println(list.size());
 	    	transaction.commit();
 	    	session.close();
-	    	return list.get(0);
+	    	return list;
 	    }
 	    //更新操作
 	   

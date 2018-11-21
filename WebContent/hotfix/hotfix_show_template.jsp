@@ -378,12 +378,12 @@
     <section class="content">
 		<div class="row">
 			<div class="box box-primary">
-				<%@ page language="java" import="hotfix.db.hotfixDbAkidOp" %>
+				<%@ page language="java" import="hotfix.db.hitfix_rpminfo_bean" %>
 				<% 
-					hotfixDbAkidOp o_akid= (hotfixDbAkidOp)request.getAttribute("akid_obj");
+					hitfix_rpminfo_bean  o_akid= (hitfix_rpminfo_bean)request.getAttribute("akid_obj");
 				%>
 				<div class="box-header with-border">
-					<h3 class="box-title" id="akid_title"><%=o_akid.getakid()%></h3>
+					<h3 class="box-title" id="akid_title"><%=o_akid.getAkid()%></h3>
 				</div>
 				<!-- /.box-header -->
 				<div class="box-body">
@@ -394,10 +394,10 @@
 							<button type="submit" class="btn btn-info pull-right editevent">edit</button>
 						</div>
 						<p class="text-muted">
-							<%=o_akid.getlink()%>
+							<%=o_akid.getLink()%>
 						</p>
 						<form class="form-horizontal" style="display:none" id="aoneform">
-							<input type="text" class="form-control"  id="akid_aone" name="<%=o_akid.getakid()%>" value="<%=o_akid.getlink()%>">
+							<input type="text" class="form-control"  id="akid_aone" name="<%=o_akid.getAkid()%>" value="<%=o_akid.getLink()%>">
 							<button type="button" class="btn btn-info btn-flat akid_submit">提交</button>
 						</form>
 						<hr>
@@ -410,7 +410,7 @@
 							<strong>描述</strong>
 							<button type="submit" class="btn btn-info pull-right editevent">edit</button>
 						</div>
-						<p class="text-muted">Malibu, California</p>
+						<p class="text-muted"><%=o_akid.getDescription()%></p>
 						<form class="form-horizontal" style="display:none">
 							<input type="text" class="form-control" id="akid_desc">
 							<button type="button" class="btn btn-info btn-flat akid_submit">提交</button>
@@ -426,7 +426,7 @@
 							<button type="submit" class="btn btn-info pull-right editevent">edit</button>
 						</div>
 						<p class="text-muted" id="akid_author">
-							<%=o_akid.getlink()%>
+							<%=o_akid.getAuthor()%>
 						</p>
 						<form class="form-horizontal" style="display:none">
 							<input type="text" class="form-control">
@@ -502,14 +502,17 @@
 						<div class="box">
 							<div class="box-body no-padding">
 								<table class="table table-condensed" id="rpmtable">
-									<tr>
-									  <td>ali2016</td>
-									  <td><span class="badge"><a href="">kernel-hotfix-D616841-ali2016-1.0-1.alios7.x86_64.rpm</a> </span></td>
-									</tr>
-									<tr>
-									  <td>ali2017</td>
-									  <td><span class="badge"><a href="">kernel-hotfix-D616841-ali2016-1.0-1.alios7.x86_64.rpm</a> </span></td>
-									</tr>
+									<%@ page language="java" import="java.util.List" %>
+									<%@ page language="java" import="hotfix.db.hotfix_rpmpackage_bean" %>
+									<%
+										List<hotfix_rpmpackage_bean> list=(List<hotfix_rpmpackage_bean>)request.getAttribute("rpmpackage_list");
+										for(hotfix_rpmpackage_bean rpmpackage_bean: list) {
+											out.print("<tr>");
+											out.print("<td>"+rpmpackage_bean.getKernel()+"</td>");
+											out.print("<td><span class=\"badge\"><a href=\"\">"+rpmpackage_bean.getRpmname()+"</a> </span></td>");
+											out.print("</tr>");
+										}
+									%>
 								</table>
 							</div>
 						<!-- /.box-body -->
@@ -529,7 +532,9 @@
 							<strong>修改函数</strong>
 							<button type="submit" class="btn btn-info pull-right editevent">edit</button>
 						</div>
-						<p>Lorem ipsum dolor sit amet, consectetur adipiscing elit. Etiam fermentum enim neque.</p>
+						<p>修改函数</p>
+						<p>修改函数</p>
+						<p>修改函数</p>
 						<form class="form-horizontal" style="display:none">
 							<input type="text" class="form-control" id="akid_func_mod">
 							<button type="button" class="btn btn-info btn-flat akid_submit">提交</button>
@@ -544,7 +549,7 @@
 							<button type="submit" class="btn btn-info pull-right editevent">edit</button>
 						</div>
 							<%
-							out.print("<a href=\"https://aone.alibaba-inc.com/code/"+o_akid.getakid()+"\">"+"https://aone.alibaba-inc.com/code/"+o_akid.getakid()+"</a>");
+							out.print("<a href=\"https://aone.alibaba-inc.com/code/"+o_akid.getAkid()+"\">"+"https://aone.alibaba-inc.com/code/"+o_akid.getAkid()+"</a>");
 							%>
 						<form class="form-horizontal" style="display:none">
 							<input type="text" class="form-control" id="akid_code">
