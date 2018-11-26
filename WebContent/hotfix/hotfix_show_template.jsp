@@ -391,10 +391,10 @@
 						<div class="form-group">
 							<strong style="display:none">aone_link</strong>
 							<strong>aone</strong>
-							<button type="submit" class="btn btn-info pull-right editevent">edit</button>
+							<button type="submit" class="btn btn-info pull-right btn-xs editevent">edit</button>
 						</div>
 						<p class="text-muted">
-							<%=o_akid.getLink()%>
+							<a href="<%=o_akid.getLink()%>"><%=o_akid.getLink()%></a>
 						</p>
 						<form class="form-horizontal" style="display:none" id="aoneform">
 							<input type="text" class="form-control"  id="akid_aone" name="<%=o_akid.getAkid()%>" value="<%=o_akid.getLink()%>">
@@ -408,11 +408,11 @@
 						<div class="form-group">
 							<strong style="display:none">description</strong>
 							<strong>描述</strong>
-							<button type="submit" class="btn btn-info pull-right editevent">edit</button>
+							<button type="submit" class="btn btn-info pull-right btn-xs editevent">edit</button>
 						</div>
 						<p class="text-muted"><%=o_akid.getDescription()%></p>
 						<form class="form-horizontal" style="display:none">
-							<input type="text" class="form-control" id="akid_desc">
+							<textarea class="form-control" id="akid_func_mod" rows="5"></textarea>
 							<button type="button" class="btn btn-info btn-flat akid_submit">提交</button>
 						</form>
 						<hr>
@@ -423,7 +423,7 @@
 						<div class="form-group">
 							<strong style="display:none">author</strong>
 							<strong>作者</strong>
-							<button type="submit" class="btn btn-info pull-right editevent">edit</button>
+							<button type="submit" class="btn btn-info pull-right btn-xs editevent">edit</button>
 						</div>
 						<p class="text-muted" id="akid_author">
 							<%=o_akid.getAuthor()%>
@@ -439,12 +439,12 @@
 						<div class="form-group">
 							<strong style="display:none">dispose</strong>
 							<strong>部署方式</strong>
-							<button type="submit" class="btn btn-info pull-right editevent">edit</button>
+							<button type="submit" class="btn btn-info pull-right btn-xs editevent">edit</button>
 						</div>
 							<p> 请严格按照灰度部署，部署节奏由业务团队自行把控</p>
 							<p> 建议方式：1台，5台，10台，50台，200台这样的节奏来进行，每次灰度之间要保留足够的观察期（如一周）</p>
 						<form class="form-horizontal" style="display:none">
-							<input type="text" class="form-control">
+							<textarea class="form-control" id="akid_func_mod" rows="3"></textarea>
 							<button type="button" class="btn btn-info btn-flat akid_submit">提交</button>
 						</form>
 							<hr>
@@ -454,12 +454,12 @@
 						<div class="form-group">
 							<strong style="display:none">install</strong>
 							<strong>安装方式</strong>
-							<button type="submit" class="btn btn-info pull-right editevent">edit</button>
+							<button type="submit" class="btn btn-info pull-right btn-xs editevent">edit</button>
 						</div>
 							<p>安装前准备： 无
 							安装命令: 安装完成后，执行 khotfix-view -r 查看</p>
 						<form class="form-horizontal" style="display:none">
-							<input type="text" class="form-control">
+							<textarea class="form-control" id="akid_func_mod" rows="3"></textarea>
 							<button type="button" class="btn btn-info btn-flat akid_submit">提交</button>
 						</form>
 						<hr>
@@ -469,11 +469,11 @@
 						<div class="form-group">
 							<strong stycle="display:none">unstall</strong>
 							<strong>卸载方式</strong>
-							<button type="submit" class="btn btn-info pull-right editevent">edit</button>
+							<button type="submit" class="btn btn-info pull-right btn-xs editevent">edit</button>
 						</div>
 							<p> 卸载rpm包即可</p>
 						<form class="form-horizontal" style="display:none">
-							<input type="text" class="form-control">
+							<textarea class="form-control" id="akid_func_mod" rows="3"></textarea>
 							<button type="button" class="btn btn-info btn-flat akid_submit">提交</button>
 						</form>
 						<hr>
@@ -481,13 +481,12 @@
 
 					<div class="top">
 						<div class="form-group">
-							<strong stycle="display:none">functest</strong>
 							<strong>功能测试</strong>
-							<button type="submit" class="btn btn-info pull-right editevent">edit</button>
+							<button type="submit" class="btn btn-info pull-right btn-xs editevent">edit</button>
 						</div>
 						<p>Lorem ipsum dolor sit amet, consectetur adipiscing elit. Etiam fermentum enim neque.</p>
 						<form class="form-horizontal" style="display:none">
-							<input type="text" class="form-control" id="akid_test">
+							<textarea class="form-control" id="akid_func_mod" rows="3"></textarea>
 							<button type="button" class="btn btn-info btn-flat akid_submit">提交</button>
 						</form>
 						<hr>
@@ -496,7 +495,7 @@
 					<div class="top">
 						<div class="form-group">
 							<strong><i class="fa fa-file-text-o margin-r-5"></i>rpm包</strong>
-							<button type="submit" class="btn btn-info pull-right editevent">edit</button>
+							<button type="submit" class="btn btn-info pull-right btn-xs editevent">edit</button>
 						</div>
 						<p>Lorem ipsum dolor sit amet, consectetur adipiscing elit. Etiam fermentum enim neque.</p>
 						<div class="box">
@@ -506,11 +505,13 @@
 									<%@ page language="java" import="hotfix.db.hotfix_rpmpackage_bean" %>
 									<%
 										List<hotfix_rpmpackage_bean> list=(List<hotfix_rpmpackage_bean>)request.getAttribute("rpmpackage_list");
-										for(hotfix_rpmpackage_bean rpmpackage_bean: list) {
-											out.print("<tr>");
-											out.print("<td>"+rpmpackage_bean.getKernel()+"</td>");
-											out.print("<td><span class=\"badge\"><a href=\"\">"+rpmpackage_bean.getRpmname()+"</a> </span></td>");
-											out.print("</tr>");
+										if (!list.isEmpty()) {
+											for(hotfix_rpmpackage_bean rpmpackage_bean: list) {
+												out.print("<tr>");
+												out.print("<td>"+rpmpackage_bean.getKernel()+"</td>");
+												out.print("<td><span class=\"\"><a href=\""+rpmpackage_bean.getDownlink()+"\">"+rpmpackage_bean.getRpmname()+"</a> </span></td>");
+												out.print("</tr>");
+											}
 										}
 									%>
 								</table>
@@ -520,7 +521,7 @@
 
 						<form class="form-horizontal" style="display:none" action="../hotfix_info_item_update">
 							<label class="control-label">yum rpm link</label>
-							<input type="text" class="form-control" id="akid_rpm">
+							<textarea class="form-control" id="akid_func_mod" rows="3"></textarea>
 							<button type="button" class="btn btn-info btn-flat " name="rpm_append" onclick="updateRpm">更新</button>
 						</form>
 						<hr>
@@ -528,15 +529,14 @@
 
 					<div class="top">
 						<div class="form-group">
-							<strong stycle="display:none">modify_func</strong>
 							<strong>修改函数</strong>
-							<button type="submit" class="btn btn-info pull-right editevent">edit</button>
+							<button type="submit" class="btn btn-info pull-right btn-xs editevent">edit</button>
 						</div>
 						<p>修改函数</p>
 						<p>修改函数</p>
 						<p>修改函数</p>
 						<form class="form-horizontal" style="display:none">
-							<input type="text" class="form-control" id="akid_func_mod">
+							<textarea class="form-control" id="akid_func_mod" rows="3"></textarea>
 							<button type="button" class="btn btn-info btn-flat akid_submit">提交</button>
 						</form>
 						<hr>
@@ -544,9 +544,8 @@
 
 					<div class="top">
 						<div class="form-group">
-							<strong stycle="display:none">patchlink</strong>
 							<strong>patch</strong>
-							<button type="submit" class="btn btn-info pull-right editevent">edit</button>
+							<button type="submit" class="btn btn-info pull-right btn-xs editevent">edit</button>
 						</div>
 							<%
 							out.print("<a href=\"https://aone.alibaba-inc.com/code/"+o_akid.getAkid()+"\">"+"https://aone.alibaba-inc.com/code/"+o_akid.getAkid()+"</a>");
