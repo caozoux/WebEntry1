@@ -16,6 +16,8 @@ import hotfix.db.hotfixDbAkidOp;
 import hotfix.db.hotfix_hibernate_hotfixrpminfo;
 import hotfix.db.hotfix_hibernate_rpmpackage;
 import hotfix.db.hotfix_rpmpackage_bean;
+import hotfix.db.rpminfo.hotfix_hibernate_functionschange;
+import hotfix.db.rpminfo.hotfix_hibernate_functionschange_bean;
 
 /**
  * Servlet implementation class hotfix_akid_show
@@ -48,14 +50,23 @@ public class hotfix_akid_show extends HttpServlet {
  			response.getWriter().append("akid: "+akid+" isn't exist.").append(request.getContextPath());
  			return;
  		}
- 		o_akid=hiber_rpminfo.select(akid);
+ 	
  		request.setAttribute("akid_obj", o_akid);
  		
  		List<hotfix_rpmpackage_bean> rpmpackage_list;
  		hotfix_hibernate_rpmpackage hiber_rpmpackager =  hotfix_hibernate_rpmpackage.getFactoryObj();
  		rpmpackage_list = hiber_rpmpackager.select(akid);
+ 		if (rpmpackage_list != null) {
+ 			request.setAttribute("rpmpackage_list", rpmpackage_list);
+ 		}
  		
- 		request.setAttribute("rpmpackage_list", rpmpackage_list);
+ 		//changefunction
+ 		hotfix_hibernate_functionschange hiber_funschange = hotfix_hibernate_functionschange.getFactoryObj();
+ 		List<hotfix_hibernate_functionschange_bean> funschange;
+ 		funschange = hiber_funschange.select(akid);
+ 		if (funschange != null) {
+ 			request.setAttribute("funschange_list", funschange);
+ 		}
     }
 	/**
 	 * @see HttpServlet#doGet(HttpServletRequest request, HttpServletResponse response)

@@ -207,7 +207,6 @@
 <script src="/WebEntry/resource/css/bootstrap/js/bootstrap.min.js"></script>
 <!-- Morris.js charts -->
 <script src="https://cdnjs.cloudflare.com/ajax/libs/raphael/2.1.0/raphael-min.js"></script>
-<script src="/WebEntry/resource/css/plugins/morris/morris.min.js"></script>
 <!-- Sparkline -->
 <script src="/WebEntry/resource/css/plugins/sparkline/jquery.sparkline.min.js"></script>
 <!-- jvectormap -->
@@ -228,7 +227,5 @@
 <script src="/WebEntry/resource/css/plugins/fastclick/fastclick.js"></script>
 <!-- AdminLTE App -->
 <script src="/WebEntry/resource/css/dist/js/app.min.js"></script>
-<!-- AdminLTE dashboard demo (This is only for demo purposes) -->
-<script src="/WebEntry/resource/css/dist/js/pages/dashboard.js"></script>
 <!-- AdminLTE for demo purposes -->
 <script src="/WebEntry/resource/css/dist/js/demo.js"></script>

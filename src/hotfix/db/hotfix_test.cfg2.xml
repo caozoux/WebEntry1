@@ -4,7 +4,7 @@
        "http://www.hibernate.org/dtd/hibernate-mapping-3.0.dtd">
   <hibernate-mapping>
       <!-- name代表的是实体类名，table代表的是表名 -->
-    <class name="hotfix.db.hitfix_rpminfo_bean" table="khotfix_debug">
+    <class name="hotfix.db.hitfix_rpminfo_bean" table="khotfix_debug" dynamic-update="true">
         <!-- 主键 -->
         <id name="id" type="int">
             <column name="id" />

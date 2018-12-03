@@ -14,6 +14,8 @@ import javax.servlet.http.HttpServletResponse;
 import hotfix.db.hitfix_rpminfo_bean;
 import hotfix.db.hotfixDbAkidOp;
 import hotfix.db.hotfix_hibernate_hotfixrpminfo;
+import hotfix.db.rpminfo.hotfix_hibernate_functionschange;
+import hotfix.db.rpminfo.hotfix_hibernate_functionschange_bean;
 
 /**
  * Servlet implementation class hotfix_db_akid_show_update
@@ -60,8 +62,16 @@ public class hotfix_db_akid_show_update extends HttpServlet {
 	 	o_akid.setakid(akid_str);
 	 	o_akid.get_akid_info(akid_str);
 		*/
-	 	hitfix_rpminfo_bean o_akid = new hitfix_rpminfo_bean();
-	 	
+
+
+ 		hotfix_hibernate_hotfixrpminfo hiber_rpminfo = hotfix_hibernate_hotfixrpminfo.getFactoryObj();
+ 		hitfix_rpminfo_bean o_akid;
+ 		o_akid=hiber_rpminfo.select(akid_str);
+ 		if (o_akid == null) {
+ 			response.getWriter().append("akid: "+akid_str+" isn't exist.").append(request.getContextPath());
+ 			return;
+ 		} 	
+
 	 	while (it.hasNext()) {
 	 		Map.Entry<String, String[]> entry = it.next(); 
 	 		String key = entry.getKey();
@@ -83,11 +93,19 @@ public class hotfix_db_akid_show_update extends HttpServlet {
 	 			case "patchlink":
 	 				o_akid.setPatchlink(value[0]);
 	 				break;	
+	 			case "aone_link":
+	 				o_akid.setAonelink(value[0]);
+	 				break;	
+	 			case "functionschange":
+	 				String[] str = value[0].split("\n");
+	 				hotfix_hibernate_functionschange hiber_rpminfo_functionchane = hotfix_hibernate_functionschange.getFactoryObj();
+	 				hiber_rpminfo_functionchane.updateByAkid(akid_str, str);
+	 				break;
 	 			default:
 	 				break;
 	 		}
 	 		
-	 		hotfix_hibernate_hotfixrpminfo hiber_rpminfo = hotfix_hibernate_hotfixrpminfo.getFactoryObj();
+	 		hiber_rpminfo.update(o_akid);
 	 		//hiber_rpminfo.insert(o_akid);
 	 		//o_akid.insert_into_db();
 	 	}
