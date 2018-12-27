@@ -11,7 +11,7 @@ import javax.servlet.http.HttpServletResponse;
 
 import net.sf.json.JSONArray;
 import net.sf.json.JSONObject;
-import net.sf.json.JSONException;
+
 
 /**
  * Servlet implementation class first_ajaxservlet_json

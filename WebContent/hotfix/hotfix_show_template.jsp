@@ -54,6 +54,21 @@
 						<hr>
 					</div>
 
+					<div class="top">
+						<div class="form-group">
+							<strong style="display:none">rpmbuild</strong>
+							<strong>rpmbuild</strong>
+							<button type="submit" class="btn btn-info pull-right btn-xs editevent">edit</button>
+						</div>
+						<% 
+							out.print("<a href=\"/WebEntry/hotfix_servlet_rpmbuild_forward?akid="+o_akid.getAkid()+"\" >rpmbuild</a>");
+						%>
+						<form clrpmbuildass="form-horizontal" style="display:none">
+							<textarea class="form-control" id="akid_func_mod" rows="5"></textarea>
+							<button type="button" class="btn btn-info btn-flat akid_submit">提交</button>
+						</form>
+						<hr>
+					</div>
 
 					<div class="top">
 						<div class="form-group">
