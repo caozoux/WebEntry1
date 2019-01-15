@@ -57,23 +57,20 @@ public class hotfix_servlet_rpmbuild_ajax extends HttpServlet {
 		String version_list = "";
     	build_status status;
     	hotfix_rpmbuild_server_item  buiditem = hotfix_rpmbuild_server.getServer(akid, "");
-    	
-    	if (buiditem == null)
-    		return 1;
-    	  
-    	status = buiditem.checkStatus();
-    	
-    	if (status == build_status.BUIDING || status == build_status.TESTING 
-    			|| status == build_status.CURRENTING) {
-    		respone_str = "doing";
-    	}
-    	
         //json在这里存放的是数组信息
         JSONArray array=new JSONArray();
         PrintWriter out=response.getWriter();
         JSONObject temp1=new JSONObject();
-       
-        if (status == build_status.BUILT) {
+        
+    	if (buiditem == null)
+    		return 1;
+    	  
+    	status = buiditem.checkStatus();
+        System.out.println("rpmbuild ajax "+status);
+    	if (status == build_status.BUIDING || status == build_status.TESTING 
+    			|| status == build_status.CURRENTING) {
+    		respone_str = "doing";
+    	} else if (status == build_status.BUILT) {
         	List<String> respone_listver = buiditem.getBuildRpmList();
         	for (String str: respone_listver) {
         		version_list += str+" ";
@@ -83,7 +80,13 @@ public class hotfix_servlet_rpmbuild_ajax extends HttpServlet {
         	respone_str = "test";
         else if (status == build_status.COMPLETE)
         	respone_str = "complete";
-     
+        else if (status == build_status.BUIDINGERR
+        		 || status == build_status.TESTINGERR
+        		 || status == build_status.CURRENTINGERR)
+        	respone_str = "failed";
+        else
+        	respone_str = "failed";
+      
            //第一个name和sex
         temp1.put("status", respone_str);
         temp1.put("verlist", version_list);

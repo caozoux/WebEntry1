@@ -11,15 +11,18 @@ import java.util.Map;
 
 import org.apache.commons.lang.StringUtils;
 
+import hotifx.db.rpmbuild.hotfix_rpmbuild_build_socket.enumBuildState;
+
 
 public class hotfix_rpmbuild_server_item {
 	
 	public String akid;
 	public List<String> kernellist;
+	public List<String> rpmllist;
 	public int kerneltype;
 	public build_status status;
 	public hotfix_hibernate_rpmbuild_bean build_bean; //记录hotfix build的目录
-	
+
 	/*
 	 * kernel version, hotfix_signal_kernel_build
 	 */
@@ -30,15 +33,15 @@ public class hotfix_rpmbuild_server_item {
 		this.akid = akid;
 		this.kerneltype = kerneltype;
 		this.kernellist = list;
+		this.rpmllist = new ArrayList<String>();
 		this.status = build_status.INIT_STATUS;
 		hotfix_hibernate_rpmbuild hibernate_rpmbuild = hotfix_hibernate_rpmbuild.getFactoryObj();
 		build_bean = hibernate_rpmbuild.select(akid);
-		
-		if ( build_bean == null) {
+
+		if (build_bean == null) {
 			hotfix_hibernate_rpmbuild_bean  bean = new hotfix_hibernate_rpmbuild_bean();
 			bean.setAkid(this.akid);
 			hibernate_rpmbuild.insert(bean);
-			
 			build_bean = hibernate_rpmbuild.select(akid);
 		}
 	}
@@ -51,19 +54,71 @@ public class hotfix_rpmbuild_server_item {
 		TEST,        //完成测试
 		CURRENTING,  //转正式包中
 		COMPLETE,    //完成
+		BUIDINGERR,
+		TESTINGERR,
+		CURRENTINGERR
 	};
+	
 	
 	/* 运行build的线程 */
 	public class CmdBuildThread  implements Runnable {  
 		hotfix_rpmbuild_server_item builditem;
+		
 		public CmdBuildThread(hotfix_rpmbuild_server_item item)
 		{
 			this.builditem = item;
 		}
+
+		private int SendBuildKernel(String kerstr) {
+			enumBuildState state;
+			hotfix_rpmbuild_build_socket build_socket =
+					new hotfix_rpmbuild_build_socket(kerstr);
+			try {
+				int ret = 1;
+				build_socket.connect();
+				build_socket.sendBuildCmd();
+
+				do {
+					state = build_socket.waitBuildCmd();
+					Thread.sleep(5000);
+				} while (state == enumBuildState.BUILDLOG);
+				
+				build_socket.closed();
+				if (state == enumBuildState.BUILDSUC) {
+					String rpmlist = build_socket.rpmlist;
+					builditem.rpmllist.add(rpmlist);
+					return 0;
+				}
+				return 1;
+
+			} catch (Exception e1) {
+				// TODO Auto-generated catch block
+				e1.printStackTrace();
+			}
+			return 1;
+		}
 		public void run() {
-			int i = 0;
+			//int i = 0;
+			int ret = 0;
+			if (builditem.kernellist.size() == 0)
+				ret = SendBuildKernel("");
+
+			for (String kerstr : builditem.kernellist) {
+				ret = SendBuildKernel(kerstr);
+				if (ret != 0)
+					break;
+			}
+			
+			if (ret == 0) {
+				
+				builditem.CompleteBuild();
+			} else {
+				CompleteBuildFailed();
+			}
+			
+		
 			System.out.println("CmdBuildThread.run()"); 
-			while(i++<10) {
+			/*while(i++<10) {
 				try {
 					Thread.sleep(1000);
 				} catch (InterruptedException e) {
@@ -72,6 +127,7 @@ public class hotfix_rpmbuild_server_item {
 				}
 			}
 			builditem.CompleteBuild();
+			*/
 		}
 	}
 	
@@ -89,7 +145,7 @@ public class hotfix_rpmbuild_server_item {
 				try {
 					Thread.sleep(1000);
 				} catch (InterruptedException e) {
-					// TODO Auto-generated catch block
+					//Auto-generated catch block
 					e.printStackTrace();
 				}
 			}
@@ -138,22 +194,35 @@ public class hotfix_rpmbuild_server_item {
 	 */
 	public List<String> getBuildRpmList()
 	{
-		List<String> list = new ArrayList();
+		//List<String> list = new ArrayList();
 		
-		list.add("rpmbuild-D1234-ali2016.rpm");
-		list.add("rpmbuild-D1234-ali2017.rpm");
-		return list;
+		//list.add("rpmbuild-D1234-ali2016.rpm");
+		//list.add("rpmbuild-D1234-ali2017.rpm");
+		return this.rpmllist;
+		//return list;
 	}
 	
 	public void startBuild() {
+		System.out.println("startBuild");
 		this.status = build_status.BUIDING;
 		this.build_bean.status =  this.status.ordinal();
 		this.build_bean.setVersionlist("");
+		this.rpmllist.clear();
+		hotfix_hibernate_rpmbuild hibernate_rpmbuild = hotfix_hibernate_rpmbuild.getFactoryObj();
+		hibernate_rpmbuild.update(this.build_bean);
+		
 		CmdBuildThread myThread = new CmdBuildThread(this);  
 		Thread thread = new Thread(myThread);  
 		thread.start();  
 	}
-	
+	private  void CompleteBuildFailed() {
+		this.status = build_status.BUIDINGERR;
+		this.build_bean.setStatus(this.status.ordinal());
+		this.build_bean.setVersionlist("");
+		hotfix_hibernate_rpmbuild hibernate_rpmbuild = hotfix_hibernate_rpmbuild.getFactoryObj();
+		hibernate_rpmbuild.update(this.build_bean);
+		System.out.println("CompleteBuildFailed");
+	}
 	private  void CompleteBuild() {
 		this.status = build_status.BUILT;
 		this.build_bean.setStatus(this.status.ordinal());

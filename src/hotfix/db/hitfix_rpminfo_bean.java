@@ -12,8 +12,8 @@ public class hitfix_rpminfo_bean {
 	String functest;
 	String patchlink;
 	String aonelink;
-	String installleve;
-	String customer;
+	String businesslevel;
+	String businessitems;
 	
 	public hitfix_rpminfo_bean() {}
 	
@@ -89,20 +89,20 @@ public class hitfix_rpminfo_bean {
 		this.aonelink = aonelink;
 	}
 	
-	public void setInstallleve(String installleve) {
-		this.installleve = installleve;
+	public void setBusinesslevel(String businesslevel) {
+		this.businesslevel = businesslevel;
 	}	
 	
-	public String getInstallleve() {
-		return installleve;
+	public String getBusinesslevel() {
+		return businesslevel;
 	}
 
-	public void setCustomer(String customer) {
-		this.customer = customer;
+	public void setBusinessitems(String businessitems) {
+		this.businessitems = businessitems;
 	}
 	
-	public String getCustomer() {
-		return customer;
+	public String getBusinessitems() {
+		return businessitems;
 	}
 	String targeval;
 	String targ_customer;

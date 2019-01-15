@@ -6,21 +6,21 @@
       <!-- sidebar menu: : style can be found in sidebar.less -->
       <ul class="sidebar-menu">
         <li class="header">kernel khotfix</li>
-        <li class="active treeview">
-          <a href="#">
-            <i class="fa fa-dashboard"></i> <a href="/WebEntry/hotfix/hotfix_info_update.jsp">patch提交</a> <i class="fa fa-angle-left pull-right"></i>
+        <li id="infoupdate">
+          <a href="/WebEntry/hotfix/hotfix_info_update.jsp">
+            <i class="fa fa-dashboard"></i> patch提交<i class="fa fa-angle-left pull-right"></i>
           </a>
         </li>
-        <li class="active treeview">
+        <li class="treeview">
           <a href="#">
             <i class="fa fa-dashboard"></i> <span>patch合入</span> <i class="fa fa-angle-left pull-right"></i>
           </a>
           <ul class="treeview-menu">
-            <li class="active"><a href="/WebEntry/hotfix/hotfix_mergePatch.jsp"><i class="fa fa-circle-o"></i> 3.14 </a></li>
+            <li class=""><a href="/WebEntry/hotfix/hotfix_mergePatch.jsp"><i class="fa fa-circle-o"></i> 3.14 </a></li>
             <li><a href="index2.html"><i class="fa fa-circle-o"></i> 4.9 </a></li>
           </ul>
         </li>
-        <li class="treeview">
+        <li id="patchlist" class="treeview">
           <a href="#">
             <i class="fa fa-files-o"></i>
             <span>patch 处理列表</span>

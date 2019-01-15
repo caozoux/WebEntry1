@@ -101,6 +101,12 @@ public class hotfix_db_akid_show_update extends HttpServlet {
 	 				hotfix_hibernate_functionschange hiber_rpminfo_functionchane = hotfix_hibernate_functionschange.getFactoryObj();
 	 				hiber_rpminfo_functionchane.updateByAkid(akid_str, str);
 	 				break;
+	 			case "businessitems":
+	 				o_akid.setBusinessitems(value[0]);
+	 				break;
+	 			case "businesslevel":
+	 				o_akid.setBusinesslevel(value[0]);
+	 				break;
 	 			default:
 	 				break;
 	 		}

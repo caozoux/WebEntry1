@@ -37,7 +37,6 @@ public class hotfix_servlet_akidupdate extends HttpServlet {
 		// TODO Auto-generated method stub
 	    PrintWriter out = response.getWriter();
 	    
-
 		String akid;
 		String Aone;
 		String desc;
@@ -51,6 +50,7 @@ public class hotfix_servlet_akidupdate extends HttpServlet {
 		author = request.getParameter("author");
 		wiki_link = request.getParameter("wiki_link");
 		summary = request.getParameter("summary");
+
 	
 	 	hitfix_rpminfo_bean o_akid;
 

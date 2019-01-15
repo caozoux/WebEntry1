@@ -57,7 +57,7 @@
 					<div class="top">
 						<div class="form-group">
 							<strong style="display:none">rpmbuild</strong>
-							<strong>rpmbuild</strong>
+							<strong>打包</strong>
 							<button type="submit" class="btn btn-info pull-right btn-xs editevent">edit</button>
 						</div>
 						<% 
@@ -84,7 +84,43 @@
 						<hr>
 					</div>
 
-
+					<div class="top">
+						<div class="form-group">
+							<strong style="display:none">business</strong>
+							<strong>业务</strong>
+							<button type="submit" class="btn btn-info pull-right btn-xs editevent">更新</button>
+						</div>
+						<p class="text-muted"><%=o_akid.getBusinesslevel()%>:<%=o_akid.getBusinessitems()%></p>
+						<form class="form-horizontal" style="display:none ">
+							<div class="form-group" style="width:200px  ">
+								<label>部署范围</label>
+								<select id="business_level" class="form-control">
+									<option disabled selected value style='display: none'></option>
+									<option>通用可选</option>
+									<option>通用必选</option>
+									<option>不通用</option>
+								</select>
+								<label>是否指定业务</label>
+								<select id="example-getting-started" multiple="multiple">
+									<%@ page language="java" import="java.util.List" %>
+									<%@ page language="java" import="hotfix.db.business.hotfix_db_business" %>
+									<%@ page language="java" import="hotfix.db.business.hotfix_db_business_bean" %>
+									<% 
+										hotfix_db_business fac = hotfix_db_business.getFactoryObj();
+										List<hotfix_db_business_bean> list=(List<hotfix_db_business_bean>)fac.selectAll();
+										if (list != null) {
+											for(hotfix_db_business_bean rpminfo_bean : list) {
+												out.print("<option value=\""+rpminfo_bean.getBusiness()+"\">"+rpminfo_bean.getBusiness()+"</option>");
+											}
+										}
+									%>
+								</select>
+							</div>
+							<div></div>
+							<button id="business_submit" type="button" class="btn btn-info btn-flat">提交</button>
+						</form>
+						<hr>
+					</div>
 					<div class="top">
 						<div class="form-group">
 							<strong style="display:none">author</strong>
@@ -164,22 +200,24 @@
 							<strong><i class="fa fa-file-text-o margin-r-5"></i>rpm包</strong>
 							<button type="submit" class="btn btn-info pull-right btn-xs editevent">edit</button>
 						</div>
-						<p>Lorem ipsum dolor sit amet, consectetur adipiscing elit. Etiam fermentum enim neque.</p>
+						
+						<p>自动更新<button type="submit" class="btn btn-info btn-xs">update</button></p>
 						<div class="box">
 							<div class="box-body no-padding">
 								<table class="table table-condensed" id="rpmtable">
 									<%@ page language="java" import="java.util.List" %>
 									<%@ page language="java" import="hotfix.db.hotfix_rpmpackage_bean" %>
 									<%
-										List<hotfix_rpmpackage_bean> list=(List<hotfix_rpmpackage_bean>)request.getAttribute("rpmpackage_list");
-										if (!list.isEmpty()) {
-											for(hotfix_rpmpackage_bean rpmpackage_bean: list) {
-												out.print("<tr>");
-												out.print("<td>"+rpmpackage_bean.getKernel()+"</td>");
-												out.print("<td><span class=\"\"><a href=\""+rpmpackage_bean.getDownlink()+"\">"+rpmpackage_bean.getRpmname()+"</a> </span></td>");
-												out.print("</tr>");
+										List<hotfix_rpmpackage_bean> listrpm=(List<hotfix_rpmpackage_bean>)request.getAttribute("rpmpackage_list");
+										if (listrpm != null)
+											if (!listrpm.isEmpty()) {
+												for(hotfix_rpmpackage_bean rpmpackage_bean: listrpm) {
+													out.print("<tr>");
+													out.print("<td>"+rpmpackage_bean.getKernel()+"</td>");
+													out.print("<td><span class=\"\"><a href=\""+rpmpackage_bean.getDownlink()+"\">"+rpmpackage_bean.getRpmname()+"</a> </span></td>");
+													out.print("</tr>");
+												}
 											}
-										}
 									%>
 								</table>
 							</div>
@@ -204,11 +242,12 @@
 							<%@ page language="java" import="hotfix.db.rpminfo.hotfix_hibernate_functionschange_bean" %>
 							<%
 								List<hotfix_hibernate_functionschange_bean> func_list=(List<hotfix_hibernate_functionschange_bean>)request.getAttribute("funschange_list");
-								if (!list.isEmpty()) {
-									for(hotfix_hibernate_functionschange_bean functionschange_bean: func_list) {
-										out.print("<p>"+functionschange_bean.getFile()+":"+functionschange_bean.getMode()+":"+functionschange_bean.getFunctions()+"</p>");
+								if (func_list != null)
+									if (!func_list.isEmpty()) {
+										for(hotfix_hibernate_functionschange_bean functionschange_bean: func_list) {
+											out.print("<p>"+functionschange_bean.getFile()+":"+functionschange_bean.getMode()+":"+functionschange_bean.getFunctions()+"</p>");
+										}
 									}
-								}
 							%>
 						<form class="form-horizontal" style="display:none">
 							<textarea class="form-control" id="akid_func_mod" rows="3"></textarea>
@@ -250,6 +289,7 @@
 <%@ include file="./admin_end.jsp" %>
 <script type="text/javascript">
     $(document).ready(function(){
+		$('#example-getting-started').multiselect();
 		$(".editevent").click(function() {
 			console.log("1234")
 			if ($(this).parent().parent().children(".form-horizontal").is(":hidden")) {
@@ -296,6 +336,34 @@
 			console.log("updateRpm")
 			$("#rpmtable tbody:last").append(rowTem);
 		}
+
+		$("#business_submit").click(function() {
+			akid_val=$("#akid_title").text()
+			var selectBusiness= [];
+			var selectLevel="";
+			$("#example-getting-started option:selected").each(function() {
+				selectBusiness.push($(this).val())
+			});
+			selectLevel=$("#business_level option:selected").val()
+			if (selectLevel == "") {
+				alert("部署范围未选择")
+			}
+			$.ajax({
+                type: "GET",
+				url: "hotfix_db_akid_show_update?akid="+akid_val+"&businesslevel="+selectLevel+"&businessitems="+selectBusiness.join(","),
+                dataType: "text",
+                success: function(data){
+                    if(data=="true"){
+						alert("okay")
+                    }else if(data=="false"){
+						alert("failed")
+                    }
+                },
+                error: function(){
+					alert("failed")
+                }
+            });
+		});
 	});
 </script>
 

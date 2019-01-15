@@ -205,6 +205,7 @@
 </script>
 <!-- Bootstrap 3.3.6 -->
 <script src="/WebEntry/resource/css/bootstrap/js/bootstrap.min.js"></script>
+<script src="/WebEntry/resource/css/bootstrap/js/bootstrap-multiselect.js"></script>
 <!-- Morris.js charts -->
 <script src="https://cdnjs.cloudflare.com/ajax/libs/raphael/2.1.0/raphael-min.js"></script>
 <!-- Sparkline -->

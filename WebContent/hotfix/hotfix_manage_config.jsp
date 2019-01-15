@@ -29,15 +29,11 @@
     <section class="content">
 		<div class="row">
 			<div class="col-xs-12">
-			  <div class="box">
-				<div class="box-header">
-				  <h3 class="box-title">适用范围配置</h3>
-				</div>
-				<div class="k-header k-grid-toolbar">
-					<a role="button" class="k-button k-button-icontext k-grid-add" href="#">
-						<span class="k-icon k-i-plus"></span>
-					新增</a>
-				</div>
+				<button id="business_modal" class="btn btn-primary btn-small" data-toggle="modal" data-target="#modal"  href="/Home/Test">新增</button>
+				<div class="box">
+					<div class="box-header">
+					  <h3 class="box-title">适用范围配置</h3>
+					</div>
 				<!-- /.box-header -->
 				<div class="box-body">
 				  <table id="" class="table table-bordered table-hover">
@@ -78,15 +74,9 @@
 			</div>
 			<div class="col-xs-12">
 			<button id="btn_add" class="btn btn-primary btn-small" data-toggle="modal" data-target="#modal"  href="/Home/Test">新增</button>
-			<button id="create-user">新增</button>
 			  <div class="box">
 				<div class="box-header">
 				  <h3 class="box-title">内核版本</h3>
-				</div>
-				<div class="k-header k-grid-toolbar">
-					<a role="button" class="k-button k-button-icontext k-grid-add" href="#">
-						<span class="k-icon k-i-plus"></span>
-					新增</a>
 				</div>
 				<!-- /.box-header -->
 				<div class="box-body">
@@ -169,7 +159,7 @@
         </div>
 </div>
 
-<div class="modal fade" id="businessModal" tabindex="-1" role="dialog" aria-labelledby="myModalLabel">
+<div class="modal fade" id="businessModal" tabindex="-1" role="dialog" aria-labelledby="myBusinessLabel">
         <div class="modal-dialog" role="document">
             <div class="modal-content">
                 <div class="modal-header">
@@ -200,8 +190,12 @@
 		$("#myModalLabel").text("新增");
 		$('#myModal').modal();
 	});
+	$("#business_modal").click(function () {
+		$("#myBusinessLabel").text("新增");
+		$('#businessModal').modal();
+	});
 
-	$("#buniness_submit").click(function () {
+	$("#business_submit").click(function () {
 		 var json = {
 			business: $("#business_name").val(),
 			desc: $("#business_desc").val()

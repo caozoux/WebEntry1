@@ -1,0 +1,22 @@
+<?xml version="1.0" encoding="UTF-8"?>
+  <!DOCTYPE hibernate-mapping PUBLIC 
+       "-//Hibernate/Hibernate Mapping DTD 3.0//EN"
+       "http://www.hibernate.org/dtd/hibernate-mapping-3.0.dtd">
+  <hibernate-mapping>
+   <class name="hotfix.db.business.hotfix_db_business_bean" table="khotfix_business">
+        <!-- 主键 -->
+        <id name="id" type="int">
+            <column name="id" />
+            <generator class="identity" />
+        </id>
+        
+        <property name="business" type="java.lang.String">
+            <column name="business" />
+        </property>
+        
+        <!-- 字段 -->
+        <property name="busdesc" type="java.lang.String">
+            <column name="busdesc" />
+        </property>
+    </class>
+  </hibernate-mapping>

@@ -4,7 +4,7 @@
        "http://www.hibernate.org/dtd/hibernate-mapping-3.0.dtd">
   <hibernate-mapping>
       <!-- name代表的是实体类名，table代表的是表名 -->
-    <class name="hotfix.db.hitfix_rpminfo_bean" table="khotfix_debug" dynamic-update="true">
+    <class name="hotfix.db.hitfix_rpminfo_bean" table="khotfix_akidinfo" dynamic-update="true">
         <!-- 主键 -->
         <id name="id" type="int">
             <column name="id" />
@@ -50,6 +50,16 @@
         <property name="aonelink" type="java.lang.String">
             <column name="aonelink" />
         </property>
-          
+        
+                 <!-- 字段 -->
+        <property name="businesslevel" type="java.lang.String">
+            <column name="businesslevel" />
+        </property>
+        
+                 <!-- 字段 -->
+        <property name="businessitems" type="java.lang.String">
+            <column name="businessitems" />
+        </property>
+        
     </class>
   </hibernate-mapping>

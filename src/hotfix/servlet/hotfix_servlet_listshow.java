@@ -49,7 +49,9 @@ public class hotfix_servlet_listshow extends HttpServlet {
 	    */
 		hotfix_hibernate_hotfixrpminfo hiber_rpminfo = hotfix_hibernate_hotfixrpminfo.getFactoryObj();
 		List<hitfix_rpminfo_bean> list =  hiber_rpminfo.selectAll();
-		if (!list.isEmpty()) {
+		if (list == null)
+			request.setAttribute("akid_list", null);
+		else if (!list.isEmpty()) {
 			request.setAttribute("akid_list", list);
 		}
 	    rd.forward(request, response);
