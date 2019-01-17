@@ -3,47 +3,85 @@
 <!DOCTYPE html PUBLIC "-//W3C//DTD HTML 4.01 Transitional//EN" "http://www.w3.org/TR/html4/loose.dtd">
 <html>
 <head>
-<meta http-equiv="Content-Type" content="text/html; charset=UTF-8">
-<title>Insert title here</title>
+  <%@ include file="./admin_start.jsp" %>
 </head>
-<body>
-	<form class="form-horizontal" action="../hotfix_servlet_mergePatch">
-		<div class="box-body">
-			<div class="form-group">
-				<label for="exampleInputFile">File input</label>
-				<input type="file" id="exampleInputFile">
-				<p class="help-block">Example block-level help text here.</p>
+<body class="hold-transition skin-blue sidebar-mini">
+<div class="wrapper">
+  <!-- Left side column. contains the logo and sidebar -->
+  <%@ include file="./admin_head.jsp" %>
+
+  <!-- Content Wrapper. Contains page content -->
+  <div class="content-wrapper">
+    <!-- Content Header (Page header) -->
+    <section class="content-header">
+      <h1>
+        Dashboard
+        <small>Control panel</small>
+      </h1>
+      <ol class="breadcrumb">
+        <li><a href="#"><i class="fa fa-dashboard"></i> Home</a></li>
+        <li class="active">Dashboard</li>
+      </ol>
+    </section>
+
+    <!-- Main content -->
+    <section class="content">
+		<div class="row">
+			<div class="col-md-7">
+				<div class="box box-primary">
+					<div class="box-header with-border">
+					  <h3 class="box-title">合入patch</h3>
+					</div>
+					<!-- form start -->
+					<form role="form" action="../hotfix_servlet_patchmerge" method="post">
+						<div class="box-body">
+							<div class="form-group">
+								<label for="inputName" class="col-sm-5 control-label">patch在git仓commit id</label>
+								<input id="commitid" "type="txt" class="form-control" name="commit" placeholder="commit id">
+							</div>
+							<div class="form-group">
+								<select id="kerver_select" multiple="multiple" name="kervels">
+									<%@ page language="java" import="java.util.List" %>
+									<%@ page language="java" import="hotfix.db.config.hotfix_db_config" %>
+									<%@ page language="java" import="hotfix.db.config.hotfix_hibernate_config_bean" %>
+									<% 
+									hotfix_db_config fac = hotfix_db_config.getFactoryObj();
+										List<hotfix_hibernate_config_bean> list=(List<hotfix_hibernate_config_bean>)fac.selectAll();
+										if (list != null) {
+											for(hotfix_hibernate_config_bean bean : list) {
+												out.print("<option value=\""+bean.getKerver()+"\">"+bean.getKerver()+"</option>");
+											}
+										}
+									%>
+								</select>
+							</div>
+						</div>
+						<div class="box-footer">
+							<button type="submit" class="btn btn-primary">Submit</button>
+						</div>
+					</form>
+				</div>
 			</div>
-			<input type="text" name="akid_val"/>
-			 <div class="form-group">
-					  <div class="checkbox">
-						<label><input type="checkbox" name="version" value ="ali2000">ali2000</label>
-						<label><input type="checkbox" name="version" value ="ali2001">ali2001</label>
-						<label><input type="checkbox" name="version" value ="ali2002">ali2002</label>
-						<label><input type="checkbox" name="version" value ="ali2003">ali2003</label>
-						<label><input type="checkbox" name="version" value ="ali2004">ali2004</label>
-						<label><input type="checkbox" name="version" value ="ali2005">ali2005</label>
-						<label><input type="checkbox" name="version" value ="ali2006">ali2006</label>
-						<label><input type="checkbox" name="version" value ="ali2007">ali2007</label>
-						<label><input type="checkbox" name="version" value ="ali2008">ali2008</label>
-						<label><input type="checkbox" name="version" value ="ali2009">ali2009</label>
-					  </div>
-					  <div class="checkbox">
-						<label><input type="checkbox" name="version" value ="ali2010">ali2010</label>
-						<label><input type="checkbox" name="version" value ="ali2011">ali2011</label>
-						<label><input type="checkbox" name="version" value ="ali2012">ali2012</label>
-						<label><input type="checkbox" name="version" value ="ali2013">ali2013</label>
-						<label><input type="checkbox" name="version" value ="ali2014">ali2014</label>
-						<label><input type="checkbox" name="version" value ="ali2015">ali2015</label>
-						<label><input type="checkbox" name="version" value ="ali2016">ali2016</label>
-						<label><input type="checkbox" name="version" value ="ali2017">ali2017</label>
-						<label><input type="checkbox" name="version" value ="ali2018">ali2018</label>
-					  </div>
-			 </div>
 		</div>
-		<div class="box-footer">
-			<button type="submit" class="btn btn-default">提交</button>
-		</div>
-	</form>
+    </section>
+    <!-- /.content -->
+  </div>
+  <!-- /.content-wrapper -->
+  <footer class="main-footer">
+    <div class="pull-right hidden-xs">
+      <b>Version</b> 2.3.3
+    </div>
+    <strong>Copyright &copy; 2014-2015 <a href="http://almsaeedstudio.com">Almsaeed Studio</a>.</strong> All rights
+    reserved.
+  </footer>
+
+<%@ include file="./admin_end.jsp" %>
+
+<script type="text/javascript">
+	$(document).ready(function(){
+		$('#kerver_select').multiselect();
+	});
+</script>
+
 </body>
 </html>

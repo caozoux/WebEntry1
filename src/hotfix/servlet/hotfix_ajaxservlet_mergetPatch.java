@@ -29,6 +29,12 @@ public class hotfix_ajaxservlet_mergetPatch extends HttpServlet {
         // TODO Auto-generated constructor stub
     }
 
+    public void runUpdate(String commitid) throws InterruptedException, IOException {
+    	System.out.println("update now+\n");
+    	String command2 = "/Users/zoucao-ipc/gitlab/env/hotfix/mergePatchV2.sh -m commit -k ali2015 -i" +" "+"-w ~/gitlab/alitest/"; 
+        Runtime.getRuntime().exec(command2).waitFor();
+        System.out.println("update now-\n");
+    }
 	/**
 	 * @see HttpServlet#doGet(HttpServletRequest request, HttpServletResponse response)
 	 */

@@ -67,7 +67,7 @@ public class hotfix_db_config {
 			    session=sessionFactory.openSession();
 			    transaction=session.beginTransaction();
 		 
-		    	Query q=session.createQuery("from hitfix_rpminfo_bean");
+		    	Query q=session.createQuery("from hotfix_hibernate_config_bean");
 		    	List<hotfix_hibernate_config_bean> list=q.list();
 		    	
 		    	if (list.isEmpty()) {

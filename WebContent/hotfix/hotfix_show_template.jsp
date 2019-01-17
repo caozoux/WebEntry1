@@ -198,10 +198,10 @@
 					<div class="top">
 						<div class="form-group">
 							<strong><i class="fa fa-file-text-o margin-r-5"></i>rpm包</strong>
-							<button type="submit" class="btn btn-info pull-right btn-xs editevent">edit</button>
+							<button type="submit" class="btn btn-info pull-right btn-xs editevent" >edit</button>
 						</div>
 						
-						<p>自动更新<button type="submit" class="btn btn-info btn-xs">update</button></p>
+						<p>自动更新<button type="submit" class="btn btn-info btn-xs" id="rpmupdateauto">update</button></p>
 						<div class="box">
 							<div class="box-body no-padding">
 								<table class="table table-condensed" id="rpmtable">
@@ -289,6 +289,23 @@
 <%@ include file="./admin_end.jsp" %>
 <script type="text/javascript">
     $(document).ready(function(){
+
+		$("#rpmupdateauto").click(function() {
+			akid_val=$("#akid_title").text()
+			console.log("rpmupdate"+akid_val)
+			$.ajax({
+                type: "GET",
+				url: "hotfix_servlet_rpmautoupdate_ajax?akid="+akid_val,
+                dataType: "text",
+                success: function(data){
+					alert("okay")
+                },
+                error: function(){
+					alert("failed")
+                }
+            });
+		});
+
 		$('#example-getting-started').multiselect();
 		$(".editevent").click(function() {
 			console.log("1234")
@@ -326,6 +343,7 @@
             });
 			$(this).parent().hide()
 		});
+
 		$(".rpm_submit").click(function() {
 			console.log($(this).attr("name"))
 			$(this).parent().parent().parent().hide()
