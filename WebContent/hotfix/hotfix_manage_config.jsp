@@ -29,96 +29,14 @@
     <section class="content">
 		<div class="row">
 			<div class="col-xs-12">
-				<button id="business_modal" class="btn btn-primary btn-small" data-toggle="modal" data-target="#modal"  href="/Home/Test">新增</button>
-				<div class="box">
-					<div class="box-header">
-					  <h3 class="box-title">适用范围配置</h3>
-					</div>
-				<!-- /.box-header -->
-				<div class="box-body">
-				  <table id="" class="table table-bordered table-hover">
-					<thead>
-					<tr>
-					  <th>ID </th>
-					  <th>范围</th>
-					  <th>更新时间</th>
-					  <th></th>
-					  <th> </th>
-					</tr>
-					</thead>
-					<tbody>
-					<tr>
-					  <td>Trident</td>
-					  <td>Internet
-						Explorer 4.0
-					  </td>
-					  <td>Win 95+</td>
-					  <td> 4</td>
-					  <td>X</td>
-					</tr>
-					</tbody>
-					<tfoot>
-					<tr>
-					  <th>ID </th>
-					  <th>范围</th>
-					  <th>更新时间</th>
-					  <th></th>
-					  <th> </th>
-					</tr>
-					</tfoot>
-				  </table>
-				</div>
-				<!-- /.box-body -->
-			  </div>
-			  <!-- /.box -->
+				<button id="business_modal" class="btn btn-primary btn-small" data-toggle="modal" data-target="#modal"  href="/Home/Test">新增业务</button>
+				<table id="table"></table>
 			</div>
 			<div class="col-xs-12">
-			<button id="btn_add" class="btn btn-primary btn-small" data-toggle="modal" data-target="#modal"  href="/Home/Test">新增</button>
-			  <div class="box">
-				<div class="box-header">
-				  <h3 class="box-title">内核版本</h3>
-				</div>
-				<!-- /.box-header -->
-				<div class="box-body">
-				  <table id="" class="table table-bordered table-hover">
-					<thead>
-					<tr>
-					  <th>ID </th>
-					  <th>版本</th>
-					  <th>更新时间</th>
-					  <th></th>
-					  <th> </th>
-					</tr>
-					</thead>
-					<tbody>
-					<tr>
-					  <td>Trident</td>
-					  <td>Internet
-						Explorer 4.0
-					  </td>
-					  <td>Win 95+</td>
-					  <td> 4</td>
-					  <td>X</td>
-					</tr>
-					</tbody>
-					<tfoot>
-					<tr>
-					  <th>ID </th>
-					  <th>范围</th>
-					  <th>更新时间</th>
-					  <th></th>
-					  <th> </th>
-					</tr>
-					</tfoot>
-				  </table>
-				</div>
-				<!-- /.box-body -->
-			  </div>
-			  <!-- /.box -->
+				<button id="btn_add" class="btn btn-primary btn-small" data-toggle="modal" data-target="#modal"  href="/Home/Test">新增内核</button>
+				<table id="table_kerlist"></table>
 			</div>
-        <!-- /.col -->
 		</div>
-		<!-- /.row (main row) -->
 
     </section>
     <!-- /.content -->
@@ -240,6 +158,118 @@
 
     $(document).ready(function(){
 	});
+
+  var $table = $('#table')
+  var $tableker = $('#table_kerlist')
+  var $remove = $('#remove')
+  var selections = []
+  console.log("#table call bootstrapTable")
+
+  function getIdSelections() {
+    return $.map($table.bootstrapTable('getSelections'), function (row) {
+      return row.id
+    })
+  }
+
+  function responseHandler(res) {
+    $.each(res.rows, function (i, row) {
+      row.state = $.inArray(row.id, selections) !== -1
+    })
+    return res
+  }
+
+  function detailFormatter(index, row) {
+    //var html = []
+    //$.each(row, function (key, value) {
+    //  html.push('<p><b>' + key + ':</b> ' + value + '</p>')
+    //})
+    //return html.join('')
+	    var html = "";
+		html += "<table class='table'>";
+		html += "<thead>";
+		html += "<tr style='height: 40px;'>";
+		html += "<th>akid</th>";
+		html += "<th>baoming</th>";
+		html += "<th>xiazailianjie</th>";
+		html += "</tr>";
+		html += "</thead>";
+    	return html
+  }
+
+  window.operateEvents = {
+    'click .like': function (e, value, row, index) {
+      alert('You click like action, row: ' + JSON.stringify(row))
+    },
+    'click .remove': function (e, value, row, index) {
+      $table.bootstrapTable('remove', {
+        field: 'id',
+        values: [row.id]
+      })
+    }
+  }
+
+
+  function initTable() {
+	$table.bootstrapTable({
+      height: 500,
+      columns: [{
+          title: 'ID',
+          field: 'id',
+          align: 'center',
+        },
+		{
+          title: '内核版本',
+          field: 'business',
+          align: 'left'
+        },
+      ],
+
+	  minimumCountColumns:"2",
+	  pagination:true,
+	  idField:"id",
+	  pageList:"[10, 25, 50, 100, ALL]",
+	  showFooter:false,
+	  sidePagination:"server",
+	  //url:"https://examples.wenzhixin.net.cn/examples/bootstrap_table/data",
+	  //url:"/WebEntry/hotfix_servlet_getkerlist",
+	  url:"/WebEntry/hotfix_servlet_getbusinesslist",
+	  responseHandler:"responseHandler",
+      onExpandRow: function(index, row, $detail) {
+		  console.log(row)
+      },
+    })
+    $tableker.bootstrapTable({
+      height: 500,
+      columns: [{
+          title: 'ID',
+          field: 'id',
+          align: 'center',
+        },
+		{
+          title: '内核版本',
+          field: 'kerver',
+          align: 'left'
+        },
+      ],
+	  minimumCountColumns:"2",
+	  pagination:true,
+	  idField:"id",
+	  pageList:"[10, 25, 50, 100, ALL]",
+	  showFooter:false,
+	  sidePagination:"server",
+	  //url:"https://examples.wenzhixin.net.cn/examples/bootstrap_table/data",
+	  //url:"/WebEntry/hotfix_servlet_getkerlist",
+	  url:"/WebEntry/hotfix_servlet_getkerlist",
+	  responseHandler:"responseHandler",
+      onExpandRow: function(index, row, $detail) {
+		  console.log(row)
+      },
+    })
+  }
+
+  $(function() {
+    initTable()
+  })
 </script>
 
 </body>
