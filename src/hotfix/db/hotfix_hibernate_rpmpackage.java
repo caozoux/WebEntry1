@@ -2,10 +2,12 @@ package hotfix.db;
 import java.util.Date;
 import java.util.List;
 
+import org.hibernate.Criteria;
 import org.hibernate.Session;
 import org.hibernate.SessionFactory;
 import org.hibernate.Transaction;
 import org.hibernate.cfg.Configuration;
+import org.hibernate.criterion.Restrictions;
 import org.hibernate.query.Query;
 import org.hibernate.service.ServiceRegistry;
 
@@ -79,7 +81,33 @@ public class hotfix_hibernate_rpmpackage {
 		    	session.close();
 		    	return list;
 		    }
-		    
+
+		    //查询操作
+		    public List<hotfix_rpmpackage_bean>  selectByItem(String item)
+		    {
+		    	
+		    	Transaction transaction;
+			    Session session;
+			    
+			    session=sessionFactory.openSession();
+			    transaction=session.beginTransaction();
+			    Criteria criteria = session.createCriteria(hotfix_rpmpackage_bean.class);   
+			    criteria.add(Restrictions.eq("kernel", item));
+		    	//transaction.begin();
+		    	System.out.print(item);
+		    	List<hotfix_rpmpackage_bean> list=criteria.list();
+		    	
+		    	if (list.isEmpty()) {
+		    		transaction.commit();
+		    		session.close();
+		    		return null;
+		    	}
+		    		
+		    	//System.out.println(list.size());
+		    	transaction.commit();
+		    	session.close();
+		    	return list;
+		    }
 	    //查询操作
 	    public List<hotfix_rpmpackage_bean>  select(String akid)
 	    {

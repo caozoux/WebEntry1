@@ -163,7 +163,6 @@
   var $tableker = $('#table_kerlist')
   var $remove = $('#remove')
   var selections = []
-  console.log("#table call bootstrapTable")
 
   function getIdSelections() {
     return $.map($table.bootstrapTable('getSelections'), function (row) {
@@ -174,6 +173,7 @@
   function responseHandler(res) {
     $.each(res.rows, function (i, row) {
       row.state = $.inArray(row.id, selections) !== -1
+	  console.log("zz", res, row.state)
     })
     return res
   }
@@ -216,20 +216,20 @@
           title: 'ID',
           field: 'id',
           align: 'center',
-        },
+		},
 		{
-          title: '内核版本',
-          field: 'business',
-          align: 'left'
-        },
-      ],
+			title: '内核版本',
+			field: 'business',
+			align: 'left'
+		},
+		],
 
 	  minimumCountColumns:"2",
 	  pagination:true,
 	  idField:"id",
 	  pageList:"[10, 25, 50, 100, ALL]",
 	  showFooter:false,
-	  sidePagination:"server",
+	  sidePagination:"client",
 	  //url:"https://examples.wenzhixin.net.cn/examples/bootstrap_table/data",
 	  //url:"/WebEntry/hotfix_servlet_getkerlist",
 	  url:"/WebEntry/hotfix_servlet_getbusinesslist",
@@ -256,9 +256,8 @@
 	  idField:"id",
 	  pageList:"[10, 25, 50, 100, ALL]",
 	  showFooter:false,
-	  sidePagination:"server",
+	  sidePagination:"client",
 	  //url:"https://examples.wenzhixin.net.cn/examples/bootstrap_table/data",
-	  //url:"/WebEntry/hotfix_servlet_getkerlist",
 	  url:"/WebEntry/hotfix_servlet_getkerlist",
 	  responseHandler:"responseHandler",
       onExpandRow: function(index, row, $detail) {

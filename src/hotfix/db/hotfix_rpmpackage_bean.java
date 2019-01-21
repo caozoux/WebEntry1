@@ -8,6 +8,11 @@ public class hotfix_rpmpackage_bean {
 	String downlink;
 	String testlink;
 	
+	@Override
+	public String toString() {
+		return "hotfix_rpmpackage_bean [id=" + id + ", akid=" + akid + ", kernel=" + kernel + ", rpmname=" + rpmname
+				+ ", downlink=" + downlink + ", testlink=" + testlink + "]";
+	}
 	public hotfix_rpmpackage_bean() {}
 	public hotfix_rpmpackage_bean(int id, String akid, String kernel, String rpmname, String downlink,
 			String testlink) {
