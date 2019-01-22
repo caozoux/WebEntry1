@@ -15,8 +15,7 @@
     <!-- Content Header (Page header) -->
     <section class="content-header">
       <h1>
-        Dashboard
-        <small>Control panel</small>
+		Khotfix system
       </h1>
       <ol class="breadcrumb">
         <li><a href="#"><i class="fa fa-dashboard"></i> Home</a></li>
@@ -55,8 +54,8 @@
 							</div>
 							<div class="form-group">
 								<label for="inputName" class="col-sm-2 control-label">描述</label>
-								<div class="col-sm-10">
-								  <input type="text" class="form-control" name="description">
+								<div class="col-sm-10">								  
+								  <textarea class="form-control" id="akid_func_mod" rows="3" name="description"></textarea>
 								</div>
 							</div>
 							<div class="form-group">

@@ -48,7 +48,6 @@ public class hotfix_servlet_getkerlist extends HttpServlet {
 		respone_json.put("total", list.size());
 		respone_json.put("rows", array);
 		String returndata=respone_json.toString();
-		System.out.println(respone_json);
 		PrintWriter out=response.getWriter();
 	    out.println(returndata);
 	    out.close();

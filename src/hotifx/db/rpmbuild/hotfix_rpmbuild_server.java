@@ -20,12 +20,12 @@ public class hotfix_rpmbuild_server {
 	{
 		if (worklist == null) 
 			worklist = new hotfix_rpmbuild_server();
-		 System.out.println(worklist.map);
+		 
 		 if (!worklist.map.isEmpty()) {
 			 if (worklist.map.containsKey(akid))
 				 return worklist.map.get(akid);
 		 }
-
+		 
 	     List<String> list = Arrays.asList(verlist.split(","));
 		 hotfix_rpmbuild_server_item item = worklist.createBuildItem(akid,list);
 		 return item;

@@ -15,8 +15,7 @@
     <!-- Content Header (Page header) -->
     <section class="content-header">
       <h1>
-        Dashboard
-        <small>Control panel</small>
+		Khotfix system
       </h1>
       <ol class="breadcrumb">
         <li><a href="#"><i class="fa fa-dashboard"></i> Home</a></li>
@@ -78,6 +77,8 @@
 <%@ include file="./admin_end.jsp" %>
 
 <script type="text/javascript">
+    $("#hotfix_mergePatch").addClass("active")
+    $("#ker7u").addClass("active")
 	$(document).ready(function(){
 		$('#kerver_select').multiselect();
 	});

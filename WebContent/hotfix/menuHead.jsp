@@ -11,12 +11,12 @@
             <i class="fa fa-dashboard"></i> patch提交<i class="fa fa-angle-left pull-right"></i>
           </a>
         </li>
-        <li class="treeview">
+        <li id="hotfix_mergePatch" class="treeview">
           <a href="#">
             <i class="fa fa-dashboard"></i> <span>patch合入</span> <i class="fa fa-angle-left pull-right"></i>
           </a>
           <ul class="treeview-menu">
-            <li class=""><a href="/WebEntry/hotfix/hotfix_mergePatch.jsp"><i class="fa fa-circle-o"></i> 3.14 </a></li>
+            <li id="ker7u" class=""><a href="/WebEntry/hotfix/hotfix_mergePatch.jsp"><i class="fa fa-circle-o"></i> 3.14 </a></li>
             <li><a href="index2.html"><i class="fa fa-circle-o"></i> 4.9 </a></li>
           </ul>
         </li>
@@ -31,7 +31,7 @@
           </ul>
         </li>
 
-        <li class="treeview">
+        <li id="hotfix_manage" class="treeview">
           <a href="#">
 			<i class="fa fa-random"></i>
             <span>hotfix 管理</span>
@@ -40,9 +40,9 @@
           </a>
 
           <ul class="treeview-menu">
-            <li><a href=""><i class="fa fa-search"></i> 查询</a></li>
-            <li><a href=""><i class="fa fa-plus-square-o"></i>添加</a></li>
-            <li><a href=""><i class="fa fa-wrench"></i> 配置</a></li>
+            <li id="hotfix_manage_view"><a href="/WebEntry/hotfix/hotfix_manage_view.jsp"><i class="fa fa-search"></i> 查询</a></li>
+            <li id="hotfix_manage_add"><a href="/WebEntry/hotfix/hotfix_manage_add.jsp"><i class="fa fa-plus-square-o"></i>添加</a></li>
+            <li id="hotfix_manage_config"><a href="/WebEntry/hotfix/hotfix_manage_config.jsp"><i class="fa fa-wrench"></i> 配置</a></li>
           </ul>
         </li>
 
@@ -54,9 +54,17 @@
           </a>
           <ul class="treeview-menu">
             <li><a href="/WebEntry/hotfix/hotfix_rpmbuild.jsp"><i class="fa fa-circle-o"></i> 打包</a></li>
-            <li><a href=""><i class="fa fa-circle-o"></i> 回归测试</a></li>
-            <li><a href=""><i class="fa fa-circle-o"></i> 正式包信息更新</a></li>
-            <li><a href=""><i class="fa fa-circle-o"></i> 转正式包</a></li>
+          </ul>
+        </li>
+        <li class="treeview">
+          <a href="#">
+            <i class="fa fa-pie-chart"></i>
+            <span>业务部署数据</span>
+            <i class="fa fa-angle-left pull-right"></i>
+          </a>
+          <ul class="treeview-menu">
+            <li><a href="/WebEntry/hotfix/hotfix_rpmbuild.jsp"><i class="fa fa-circle-o"></i>列表</a></li>
+            <li><a href="/WebEntry/hotfix/hotfix_rpmbuild.jsp"><i class="fa fa-circle-o"></i>配置</a></li>
           </ul>
         </li>
       </ul>

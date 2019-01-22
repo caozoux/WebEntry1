@@ -16,8 +16,7 @@
     <!-- Content Header (Page header) -->
     <section class="content-header">
       <h1>
-        Dashboard
-        <small>Control panel</small>
+		Khotfix system
       </h1>
       <ol class="breadcrumb">
         <li><a href="#"><i class="fa fa-dashboard"></i> Home</a></li>
@@ -76,7 +75,7 @@
 							<strong>描述</strong>
 							<button type="submit" class="btn btn-info pull-right btn-xs editevent">edit</button>
 						</div>
-						<p class="text-muted"><%=o_akid.getDescription()%></p>
+						<p style="white-space: pre-line" class="text-muted"><%=o_akid.getDescription()%></p>
 						<form class="form-horizontal" style="display:none">
 							<textarea class="form-control" id="akid_func_mod" rows="5"></textarea>
 							<button type="button" class="btn btn-info btn-flat akid_submit">提交</button>

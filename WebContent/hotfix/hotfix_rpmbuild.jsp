@@ -16,8 +16,8 @@
     <!-- Content Header (Page header) -->
     <section class="content-header">
       <h1>
-        Dashboard
-        <small>Control panel</small>
+		 OS
+        <small> Khotfix build</small>
       </h1>
       <ol class="breadcrumb">
         <li><a href="#"><i class="fa fa-dashboard"></i> Home</a></li>
@@ -87,27 +87,11 @@
 				<div id="downlinklist">
 				</div>
 				 <div class="form-group">
-					 <div class="checkbox" id="versionSelect">
-						<label><input type="checkbox" name="version" value ="ali2000">ali2000</label>
-						<label><input type="checkbox" name="version" value ="ali2001">ali2001</label>
-						<label><input type="checkbox" name="version" value ="ali2002">ali2002</label>
-						<label><input type="checkbox" name="version" value ="ali2003">ali2003</label>
-						<label><input type="checkbox" name="version" value ="ali2004">ali2004</label>
-						<label><input type="checkbox" name="version" value ="ali2005">ali2005</label>
-						<label><input type="checkbox" name="version" value ="ali2006">ali2006</label>
-						<label><input type="checkbox" name="version" value ="ali2007">ali2007</label>
-						<label><input type="checkbox" name="version" value ="ali2008">ali2008</label>
-						<label><input type="checkbox" name="version" value ="ali2009">ali2009</label>
-						<label><input type="checkbox" name="version" value ="ali2010">ali2010</label>
-						<label><input type="checkbox" name="version" value ="ali2011">ali2011</label>
-						<label><input type="checkbox" name="version" value ="ali2012">ali2012</label>
-						<label><input type="checkbox" name="version" value ="ali2013">ali2013</label>
-						<label><input type="checkbox" name="version" value ="ali2014">ali2014</label>
-						<label><input type="checkbox" name="version" value ="ali2015">ali2015</label>
-						<label><input type="checkbox" name="version" value ="ali2016">ali2016</label>
-						<label><input type="checkbox" name="version" value ="ali2017">ali2017</label>
-						<label><input type="checkbox" name="version" value ="ali2018">ali2018</label>
-					</div>
+						<div class="form-inline">
+							<span>指定内核:</span>
+						</div>
+						<select id="kerver_select" multiple="multiple" name="kervels">
+						</select>
 				 </div>
 			  </div>
 			</div>
@@ -131,7 +115,29 @@
 
 <%@ include file="./admin_end.jsp" %>
 <script type="text/javascript">
+
+	function getKerList() {
+		$.ajax({
+			type: "GET",
+			url: "/WebEntry/hotfix_servlet_getkerlist",
+			dataType: "text",
+			success: function(data){
+				var datajson=JSON.parse(data)
+				var data1=datajson["rows"]
+				console.log(data1[1]["kerver"])
+				for (var i=0; i < data1.length;i++) {
+					$("#kerver_select").append("<option value='" + data1[i]["kerver"] + "'>" + data1[i]["kerver"]+"</option>");
+				}
+				$('#kerver_select').multiselect();
+			},
+			error: function(){
+			}
+		});
+	}
+
     $(document).ready(function(){
+
+		getKerList()
 		<%@ page language="java" import="java.util.List" %>
 		<%@ page language="java" import="hotifx.db.rpmbuild.hotfix_hibernate_rpmbuild_bean" %>
 		<% 
@@ -163,16 +169,16 @@
 		$("#buildrpm").click(function() {
 			//var verlist = [];
 			console.log("buildrpm")
-			var verstr="ali2012,ali2013";
-			$("#versionSelect :checkbox").each(function(index,element) {
-				if ($(this).is(':checked')) {
-					//verlist.push($(this).val())
-					verstr=verstr+$(this).val()+","
-				}
-			});
+			var list=$('#kerver_select').val()
+			var verstr=""
+			if (list != null)
+				if (list.length > 0)
+					verstr = list.join(",")
+
 			if (verstr == "") {
 				verstr="all";
 			}
+
 			$("#buildrpmprocess").css("width",5);
 			$("#downlinklist").empty()
 			console.log(verstr)
@@ -181,11 +187,6 @@
 				url: "/WebEntry/hotfix_servlet_rpmbuild_ajax?akid="+akid+"&verlist="+verstr+"&command=build",
 				dataType: "text",
 				success: function(data){
-					if(data=="true"){
-						console.log("true")
-						//$("#show").html("===ok==="+"<br/>"+"name="+$("[name=name]").val()+"<br/>"+"pwd="+$("[name=pwd]").val());
-					}else if(data=="false"){
-					}
 				},
 				error: function(){
 				}

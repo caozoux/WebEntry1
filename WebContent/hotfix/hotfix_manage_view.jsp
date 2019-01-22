@@ -16,8 +16,7 @@
     <!-- Content Header (Page header) -->
     <section class="content-header">
       <h1>
-        Dashboard
-        <small>Control panel</small>
+		Khotfix system
       </h1>
       <ol class="breadcrumb">
         <li><a href="#"><i class="fa fa-dashboard"></i> Home</a></li>
@@ -45,10 +44,13 @@
 <%@ include file="./admin_end.jsp" %>
 
 <script type="text/javascript">
+
   var $table  = $('#table')
   var $remove = $('#remove')
   var selections = []
 
+    $("#hotfix_manage").addClass("active")
+    $("#hotfix_manage_view").addClass("active")
 
   function aFormatter(value, row, index) {
 	  return [
@@ -108,6 +110,7 @@
           title: 'ID',
           field: 'id',
           align: 'center',
+          width: '20',
         },
 		{
           title: '内核版本',
@@ -118,7 +121,6 @@
 	  detailView:true,
 	  detailFormatter:"detailFormatter",
 	  minimumCountColumns:"2",
-	  showPaginationSwitch:true,
 	  pagination:true,
 	  idField:"id",
 	  pageList:"[10, 25, 50, 100, ALL]",

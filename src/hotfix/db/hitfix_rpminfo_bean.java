@@ -15,7 +15,10 @@ public class hitfix_rpminfo_bean {
 	String businesslevel;
 	String businessitems;
 	
-	public hitfix_rpminfo_bean() {}
+	public hitfix_rpminfo_bean() {
+		this.businesslevel="";
+		this.businessitems="";
+	}
 	
 	public int getId() {
 		return id;

@@ -5,6 +5,7 @@ import java.io.BufferedWriter;
 import java.io.InputStreamReader;
 import java.io.OutputStreamWriter;
 import java.util.ArrayList;
+import java.util.Arrays;
 import java.util.Iterator;
 import java.util.List;
 import java.util.Map;
@@ -76,7 +77,7 @@ public class hotfix_rpmbuild_server_item {
 			try {
 				int ret = 1;
 				build_socket.connect();
-				build_socket.sendBuildCmd();
+				build_socket.sendBuildCmd(builditem.akid, kerstr);
 
 				do {
 					state = build_socket.waitBuildCmd();
@@ -98,16 +99,16 @@ public class hotfix_rpmbuild_server_item {
 			return 1;
 		}
 		public void run() {
-			//int i = 0;
 			int ret = 0;
+		
 			if (builditem.kernellist.size() == 0)
 				ret = SendBuildKernel("");
-
-			for (String kerstr : builditem.kernellist) {
-				ret = SendBuildKernel(kerstr);
-				if (ret != 0)
-					break;
-			}
+			else 
+				for (String kerstr : builditem.kernellist) {
+					ret = SendBuildKernel(kerstr);
+					if (ret != 0)
+						break;
+				}
 			
 			if (ret == 0) {
 				
@@ -194,19 +195,15 @@ public class hotfix_rpmbuild_server_item {
 	 */
 	public List<String> getBuildRpmList()
 	{
-		//List<String> list = new ArrayList();
-		
-		//list.add("rpmbuild-D1234-ali2016.rpm");
-		//list.add("rpmbuild-D1234-ali2017.rpm");
 		return this.rpmllist;
-		//return list;
 	}
 	
-	public void startBuild() {
+	public void startBuild(String kervlist) {
 		System.out.println("startBuild");
+		this.kernellist = Arrays.asList(kervlist.split(","));
 		this.status = build_status.BUIDING;
 		this.build_bean.status =  this.status.ordinal();
-		this.build_bean.setVersionlist("");
+		this.build_bean.setVersionlist(kervlist);
 		this.rpmllist.clear();
 		hotfix_hibernate_rpmbuild hibernate_rpmbuild = hotfix_hibernate_rpmbuild.getFactoryObj();
 		hibernate_rpmbuild.update(this.build_bean);

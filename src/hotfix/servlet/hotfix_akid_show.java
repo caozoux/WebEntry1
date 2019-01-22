@@ -50,7 +50,7 @@ public class hotfix_akid_show extends HttpServlet {
  			response.getWriter().append("akid: "+akid+" isn't exist.").append(request.getContextPath());
  			return;
  		}
- 	
+ 		System.out.println(o_akid.getDescription());
  		request.setAttribute("akid_obj", o_akid);
  		
  		List<hotfix_rpmpackage_bean> rpmpackage_list;

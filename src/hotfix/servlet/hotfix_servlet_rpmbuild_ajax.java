@@ -2,6 +2,7 @@ package hotfix.servlet;
 
 import java.io.IOException;
 import java.io.PrintWriter;
+import java.util.Arrays;
 import java.util.List;
 
 import javax.servlet.ServletException;
@@ -108,12 +109,13 @@ public class hotfix_servlet_rpmbuild_ajax extends HttpServlet {
     	hotfix_rpmbuild_server_item  buiditem = hotfix_rpmbuild_server.getServer(akid, verlist);
     	status = buiditem.checkStatus();
     	
+
     	if (status == build_status.BUIDING || status == build_status.TESTING 
     			|| status == build_status.CURRENTING) {
     		return 1;
     	}
     	
-    	buiditem.startBuild();
+    	buiditem.startBuild(verlist);
     	
     	return 0;
     }

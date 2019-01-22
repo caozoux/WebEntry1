@@ -16,8 +16,7 @@
     <!-- Content Header (Page header) -->
     <section class="content-header">
       <h1>
-        Dashboard
-        <small>Control panel</small>
+		Khotfix system
       </h1>
       <ol class="breadcrumb">
         <li><a href="#"><i class="fa fa-dashboard"></i> Home</a></li>
@@ -149,6 +148,9 @@
 </div>
 
 <script type="text/javascript">
+
+    $("#hotfix_manage").addClass("active")
+    $("#hotfix_manage_add").addClass("active")
 
 	$("#pushselect").click(function () {
 		console.log($(this).parent().parent().val())

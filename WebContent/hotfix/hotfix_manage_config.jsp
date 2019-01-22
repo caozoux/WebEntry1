@@ -16,8 +16,7 @@
     <!-- Content Header (Page header) -->
     <section class="content-header">
       <h1>
-        Dashboard
-        <small>Control panel</small>
+		Khotfix system
       </h1>
       <ol class="breadcrumb">
         <li><a href="#"><i class="fa fa-dashboard"></i> Home</a></li>
@@ -103,6 +102,9 @@
 </div>
 
 <script type="text/javascript">
+
+    $("#hotfix_manage").addClass("active")
+    $("#hotfix_manage_config").addClass("active")
 
 	$("#btn_add").click(function () {
 		$("#myModalLabel").text("新增");
@@ -211,11 +213,11 @@
 
   function initTable() {
 	$table.bootstrapTable({
-      height: 500,
       columns: [{
           title: 'ID',
           field: 'id',
-          align: 'center',
+          align: 'left',
+          width: '20',
 		},
 		{
 			title: '内核版本',
@@ -239,11 +241,11 @@
       },
     })
     $tableker.bootstrapTable({
-      height: 500,
       columns: [{
           title: 'ID',
           field: 'id',
-          align: 'center',
+          align: 'left',
+          width: '20',
         },
 		{
           title: '内核版本',

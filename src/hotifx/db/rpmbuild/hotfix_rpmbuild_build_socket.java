@@ -19,7 +19,8 @@ import java.io.BufferedWriter;
 
 
 public class hotfix_rpmbuild_build_socket {
-	public static final String IP_ADDR = "11.165.67.4";//服务器地址  这里要改成服务器的ip
+	//public static final String IP_ADDR = "11.165.67.4";  //服务器地址,这里要改成服务器的ip
+	public static final String IP_ADDR = "11.238.157.159"; //服务器地址,这里要改成服务器的ip
 	public static final int PORT = 50001;//服务器端口号  
 	public Socket socket;
 	String kerverison;
@@ -52,11 +53,9 @@ public class hotfix_rpmbuild_build_socket {
 	public enumBuildState waitBuildCmd() throws Exception {
 		try {
 		
-				String jsonString = "{\"command\":\"wait\",\"akid\":\"D608634\",\"ver\":\"ali2015,ali2016\"}";
+				String jsonString = "{\"command\":\"wait\"}";
 
 				inputStream = new DataInputStream(new BufferedInputStream(socket.getInputStream())); 
-				//将String转化为byte[]
-				//byte[] jsonByte = new byte[jsonString.length()+1];
 				byte[] jsonByte = jsonString.getBytes();
         	
 				System.out.println("发的数据长度为:"+jsonByte.length);
@@ -102,15 +101,15 @@ public class hotfix_rpmbuild_build_socket {
 		}
 		
 	}
-	public int sendBuildCmd() throws Exception {
+	public int sendBuildCmd(String akid, String kerlist) throws Exception {
 		try {
 			
-			String jsonString = "{\"command\":\"build\",\"akid\":\"D608634\",\"ver\":\"ali2016,ali2017\"}";
+			String jsonString = "{\"command\":\"build\",\"akid\":\""+akid+"\",\"ver\":\""+kerlist+"\"}";
 			JSONObject json = JSONObject.fromObject(jsonString);
 			//将String转化为byte[]
         	byte[] jsonByte = new byte[jsonString.length()+1];
         	jsonByte = jsonString.getBytes();
- 
+        	System.out.println("发生编译命令:"+jsonString);
      	    System.out.println("发的数据长度为:"+jsonByte.length);
      	    outputStream.write(jsonByte);
      	    outputStream.flush();
