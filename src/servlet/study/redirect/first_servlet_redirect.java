@@ -29,7 +29,7 @@ public class first_servlet_redirect extends HttpServlet {
 		// TODO Auto-generated method stub
 		//response.getWriter().append("Served at: ").append(request.getContextPath());
 	    response.setContentType("text/html; charset=UTF-8");
-	    response.sendRedirect("/WebEntry/FirstEntry/redirec/first_servletredirect_target.jsp");
+	    response.sendRedirect("/oskhotfix/FirstEntry/redirec/first_servletredirect_target.jsp");
 	}
 
 	/**

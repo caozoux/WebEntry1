@@ -2,6 +2,7 @@ package hotfix.db.testlink;
 
 import java.util.List;
 
+import org.apache.commons.lang.StringUtils;
 import org.hibernate.Query;
 import org.hibernate.Session;
 import org.hibernate.SessionFactory;
@@ -107,6 +108,41 @@ public class hotfix_hibernate_testlink {
     	session.close();
     	return list;
     }
+    
+    public hotfix_hibernate_testlink_bean  updateByAkidAndKervel(String akid, String testlinkChangelist)
+    {
+    	Transaction transaction;
+	    Session session;
+	    
+	    session=sessionFactory.openSession();
+	    transaction=session.beginTransaction();
+	    hotfix_hibernate_testlink_bean rpminfo = new hotfix_hibernate_testlink_bean();
+    	
+    	//transaction.begin();
+    	System.out.print(akid);
+    	String[] changeItem=testlinkChangelist.split(":") ;
+    	String kerver=StringUtils.strip(changeItem[0]);
+    	Query q=session.createQuery("from hotfix_hibernate_testlink_bean rpminfo where rpminfo.akid=:name and rpminfo.kerver=:kerstr").setParameter("name", akid).setParameter("kerstr", kerver);
+    	List<hotfix_hibernate_testlink_bean> list=q.list();
+    	
+    	for(hotfix_hibernate_testlink_bean item:list){
+            session.delete(item);
+    	}	
+    	
+    	
+    	hotfix_hibernate_testlink_bean changeObj = new hotfix_hibernate_testlink_bean();
+
+    	changeObj.setKerver(kerver);
+    	changeObj.setAkid(akid);
+    	changeObj.setTestlink(testlinkChangelist);
+    	session.save(changeObj);
+    	
+    	  
+    	transaction.commit();
+    	session.close();
+    	return changeObj;
+    }
+    
     //更新操作
     //查询操作
     public List<hotfix_hibernate_testlink_bean>  updateByAkid(String akid, String[] testlinkChangelist)
@@ -129,7 +165,7 @@ public class hotfix_hibernate_testlink {
     	
     	for(String str:testlinkChangelist) {
     		hotfix_hibernate_testlink_bean changeObj = new hotfix_hibernate_testlink_bean();
-    		String[] changeItem=str.split(" ") ;
+    		String[] changeItem=str.split(":") ;
     		changeObj.setKerver(changeItem[0]);
     		changeObj.setAkid(akid);
     		changeObj.setTestlink(str);

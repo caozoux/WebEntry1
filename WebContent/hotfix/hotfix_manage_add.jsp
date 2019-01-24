@@ -172,7 +172,7 @@
 		console.log(JSON.stringify(json))
 		$.ajax({
 			type: "post",
-			url: "/WebEntry/hotfix_servlet_mangeUpdate_ajax",
+			url: "/oskhotfix/hotfix_servlet_mangeUpdate_ajax",
 			data: "json="+JSON.stringify(json),
 			dataType: "json",
 			success: function (message) {

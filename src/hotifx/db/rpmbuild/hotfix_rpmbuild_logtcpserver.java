@@ -65,7 +65,6 @@ public class hotfix_rpmbuild_logtcpserver extends Thread {
 		        builditem = hotfix_rpmbuild_server.getServer(akid, "");
 		        
 		        while((line = br.readLine()) != null){
-		        	System.out.println(akid+" log:"+line);
 		        	builditem.buildlog.append(line+"\n");
 		        }
 		        

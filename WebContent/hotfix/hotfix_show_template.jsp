@@ -60,7 +60,7 @@
 							<button type="submit" class="btn btn-info pull-right btn-xs editevent">edit</button>
 						</div>
 						<% 
-							out.print("<a href=\"/WebEntry/hotfix_servlet_rpmbuild_forward?akid="+o_akid.getAkid()+"\" >rpmbuild</a>");
+							out.print("<a href=\"/oskhotfix/hotfix_servlet_rpmbuild_forward?akid="+o_akid.getAkid()+"\" >rpmbuild</a>");
 						%>
 						<form clrpmbuildass="form-horizontal" style="display:none">
 							<textarea class="form-control" id="akid_func_mod" rows="5"></textarea>
@@ -340,7 +340,7 @@
 				return
 			$.ajax({
                 type: "GET",
-				url: "hotfix_db_akid_show_update?akid="+akid_val+"&"+akid_item+"="+input_val,
+				url: "hotfix_db_akid_show_update?akid="+akid_val+"&"+akid_item+"="+encodeURIComponent(input_val),
                 dataType: "text",
                 success: function(data){
                     if(data=="true"){

@@ -124,7 +124,7 @@
 		console.log(JSON.stringify(json))
 		$.ajax({
 			type: "post",
-			url: "/WebEntry/hotfix_servlet_business_ajax",
+			url: "/oskhotfix/hotfix_servlet_business_ajax",
 			data: "json="+JSON.stringify(json),
 			dataType: "json",
 			success: function (message) {
@@ -146,7 +146,7 @@
 		console.log(JSON.stringify(json))
 		$.ajax({
 			type: "post",
-			url: "/WebEntry/hotfix_servlet_mangeUpdate_ajax",
+			url: "/oskhotfix/hotfix_servlet_mangeUpdate_ajax",
 			data: "json="+JSON.stringify(json),
 			dataType: "json",
 			success: function (message) {
@@ -233,8 +233,8 @@
 	  showFooter:false,
 	  sidePagination:"client",
 	  //url:"https://examples.wenzhixin.net.cn/examples/bootstrap_table/data",
-	  //url:"/WebEntry/hotfix_servlet_getkerlist",
-	  url:"/WebEntry/hotfix_servlet_getbusinesslist",
+	  //url:"/oskhotfix/hotfix_servlet_getkerlist",
+	  url:"/oskhotfix/hotfix_servlet_getbusinesslist",
 	  responseHandler:"responseHandler",
       onExpandRow: function(index, row, $detail) {
 		  console.log(row)
@@ -260,7 +260,7 @@
 	  showFooter:false,
 	  sidePagination:"client",
 	  //url:"https://examples.wenzhixin.net.cn/examples/bootstrap_table/data",
-	  url:"/WebEntry/hotfix_servlet_getkerlist",
+	  url:"/oskhotfix/hotfix_servlet_getkerlist",
 	  responseHandler:"responseHandler",
       onExpandRow: function(index, row, $detail) {
 		  console.log(row)

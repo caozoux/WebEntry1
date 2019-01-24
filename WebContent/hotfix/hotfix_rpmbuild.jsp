@@ -58,7 +58,7 @@
 						<%@ page language="java" import="hotifx.db.rpmbuild.hotfix_hibernate_rpmbuild_bean" %>
 						<%
 							hotfix_hibernate_rpmbuild_bean bean=(hotfix_hibernate_rpmbuild_bean)request.getAttribute("akid_obj");
-							out.println("<a href=\"/WebEntry/hotfix_servlet_getBuildLog?akid="+bean.getAkid()+"\" target=\"_blank\">查看日志</a>");
+							out.println("<a href=\"/oskhotfix/hotfix_servlet_getBuildLog?akid="+bean.getAkid()+"\" target=\"_blank\">查看日志</a>");
 						%>
 					</div>
 					<div class="progress progress-sm active">
@@ -124,7 +124,7 @@
 	function getKerList() {
 		$.ajax({
 			type: "GET",
-			url: "/WebEntry/hotfix_servlet_getkerlist",
+			url: "/oskhotfix/hotfix_servlet_getkerlist",
 			dataType: "text",
 			success: function(data){
 				var datajson=JSON.parse(data)
@@ -189,7 +189,7 @@
 			console.log(verstr)
 			$.ajax({
 				type: "GET",
-				url: "/WebEntry/hotfix_servlet_rpmbuild_ajax?akid="+akid+"&verlist="+verstr+"&command=build",
+				url: "/oskhotfix/hotfix_servlet_rpmbuild_ajax?akid="+akid+"&verlist="+verstr+"&command=build",
 				dataType: "text",
 				success: function(data){
 				},
@@ -278,7 +278,7 @@
 
 				$.ajax({
 					type: "GET",
-					url: "/WebEntry/hotfix_servlet_rpmbuild_ajax?akid="+akid+"&command=check",
+					url: "/oskhotfix/hotfix_servlet_rpmbuild_ajax?akid="+akid+"&command=check",
 					dataType: "text",
 					success: function(data){
 						console.log(data)

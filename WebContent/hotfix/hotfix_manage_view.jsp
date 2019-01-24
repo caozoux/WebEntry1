@@ -127,8 +127,8 @@
 	  showFooter:false,
 	  sidePagination:"client",
 	  //url:"https://examples.wenzhixin.net.cn/examples/bootstrap_table/data",
-	  //url:"/WebEntry/hotfix_servlet_getkerlist",
-	  url:"/WebEntry/hotfix_servlet_getkerlist",
+	  //url:"/oskhotfix/hotfix_servlet_getkerlist",
+	  url:"/oskhotfix/hotfix_servlet_getkerlist",
 	  responseHandler:"responseHandler",
       onExpandRow: function(index, row, $detail) {
 			var kerver=row['kerver']
@@ -191,7 +191,7 @@
 			  idField:"id",
 			  showFooter:false,
 			  sidePagination:"client",
-			  url:"/WebEntry/hotfix_servlet_getAkidInfoByKervel?kervel="+kerver,
+			  url:"/oskhotfix/hotfix_servlet_getAkidInfoByKervel?kervel="+kerver,
 			  responseHandler:"responseHandler",
 			})
 		},

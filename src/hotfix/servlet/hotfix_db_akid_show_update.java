@@ -72,6 +72,7 @@ public class hotfix_db_akid_show_update extends HttpServlet {
 
  		hotfix_hibernate_hotfixrpminfo hiber_rpminfo = hotfix_hibernate_hotfixrpminfo.getFactoryObj();
  		hitfix_rpminfo_bean o_akid;
+ 		hotfix_hibernate_testlink mFac;
  		o_akid=hiber_rpminfo.select(akid_str);
  		if (o_akid == null) {
  			response.getWriter().append("akid: "+akid_str+" isn't exist.").append(request.getContextPath());
@@ -93,12 +94,18 @@ public class hotfix_db_akid_show_update extends HttpServlet {
 	 			case "author":
 	 				o_akid.setAuthor(value[0]);
 	 				break;
+	 			case "functestsignal":
+	 				String functest_sigstr = value[0];
+	 				mFac = hotfix_hibernate_testlink.getFactoryObj();
+	 				mFac.updateByAkidAndKervel(akid_str, functest_sigstr);
+	 				break;
+	 				
 	 			case "functest":
 	 				String[] functest_str = value[0].split("<br>");
 	 				for(String pstr : functest_str) {
 	 					System.out.println(pstr);
 	 				}
-	 				hotfix_hibernate_testlink mFac = hotfix_hibernate_testlink.getFactoryObj();
+	 				mFac = hotfix_hibernate_testlink.getFactoryObj();
 	 				mFac.updateByAkid(akid_str, functest_str);
 
 	 				//hotfix_hibernate_functionschange hiber_rpminfo_functionchane = hotfix_hibernate_functionschange.getFactoryObj();
