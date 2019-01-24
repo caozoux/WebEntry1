@@ -186,7 +186,19 @@
 							<strong>功能测试</strong>
 							<button type="submit" class="btn btn-info pull-right btn-xs editevent">edit</button>
 						</div>
-						<p>Lorem ipsum dolor sit amet, consectetur adipiscing elit. Etiam fermentum enim neque.</p>
+								
+						<%@ page language="java" import="hotfix.db.testlink.hotfix_hibernate_testlink" %>
+						<%@ page language="java" import="hotfix.db.testlink.hotfix_hibernate_testlink_bean" %>
+						<%
+							hotfix_hibernate_testlink mFac = hotfix_hibernate_testlink.getFactoryObj();
+							List<hotfix_hibernate_testlink_bean> listlink=mFac.select(o_akid.getAkid());
+							if (listlink != null)
+							if (!listlink.isEmpty()) {
+								for(hotfix_hibernate_testlink_bean testlink_bean: listlink) {
+									out.print("<p>"+testlink_bean.getTestlink()+"</p>");
+								}
+							}
+						%>
 						<form class="form-horizontal" style="display:none">
 							<textarea class="form-control" id="akid_func_mod" rows="3"></textarea>
 							<button type="button" class="btn btn-info btn-flat akid_submit">提交</button>
@@ -244,7 +256,7 @@
 								if (func_list != null)
 									if (!func_list.isEmpty()) {
 										for(hotfix_hibernate_functionschange_bean functionschange_bean: func_list) {
-											out.print("<p>"+functionschange_bean.getFile()+":"+functionschange_bean.getMode()+":"+functionschange_bean.getFunctions()+"</p>");
+											out.print("<p style=\"white-spacing:pre-line\">"+functionschange_bean.getFile()+":"+functionschange_bean.getMode()+":"+functionschange_bean.getFunctions()+"\r\n</p>");
 										}
 									}
 							%>
@@ -319,6 +331,7 @@
 			akid_val=$("#akid_title").text()
 			akid_item = $(this).parent().parent().children("div").children("strong:first").text();
 			input_val = $(this).parent().children("textarea").val();
+			input_val = input_val.replace(/\n|\r\n/g, "<br>");
 			console.log(input_val)
 			console.log(akid_val)
 			console.log(akid_item)

@@ -1,0 +1,32 @@
+<?xml version="1.0" encoding="UTF-8"?>
+  <!DOCTYPE hibernate-mapping PUBLIC 
+       "-//Hibernate/Hibernate Mapping DTD 3.0//EN"
+       "http://www.hibernate.org/dtd/hibernate-mapping-3.0.dtd">
+  <hibernate-mapping>
+   <class name="hotfix.db.testlink.hotfix_hibernate_testlink_bean" table="hotfix_akid_testlink">
+        <!-- 主键 -->
+        <id name="id" type="int">
+            <column name="id" />
+            <generator class="identity" />
+        </id>
+        
+        <property name="akid" type="java.lang.String">
+            <column name="akid" />
+        </property>
+        
+        <!-- 字段 -->
+        <property name="kerver" type="java.lang.String">
+            <column name="kerver" />
+        </property>
+        
+               <!-- 字段 -->
+        <property name="testlink" type="java.lang.String">
+            <column name="testlink" />
+        </property>
+        
+               <!-- 字段 -->
+        <property name="kerneltype" type="int">
+            <column name="kerneltype" />
+        </property>
+    </class>
+  </hibernate-mapping>

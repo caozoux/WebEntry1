@@ -54,7 +54,12 @@
 				<div class="box-body">
 					<div class="form-inline">
 						<span id="rpmbuildstatus">成功</span>
-						<a>查看日志</a>
+						<%@ page language="java" import="java.util.List" %>
+						<%@ page language="java" import="hotifx.db.rpmbuild.hotfix_hibernate_rpmbuild_bean" %>
+						<%
+							hotfix_hibernate_rpmbuild_bean bean=(hotfix_hibernate_rpmbuild_bean)request.getAttribute("akid_obj");
+							out.println("<a href=\"/WebEntry/hotfix_servlet_getBuildLog?akid="+bean.getAkid()+"\" target=\"_blank\">查看日志</a>");
+						%>
 					</div>
 					<div class="progress progress-sm active">
 						<div class="progress-bar progress-bar-success progress-bar-striped" role="progressbar" aria-valuenow="20" aria-valuemin="0" aria-valuemax="100" style="width: 1%" id="buildrpmprocess">
@@ -141,7 +146,6 @@
 		<%@ page language="java" import="java.util.List" %>
 		<%@ page language="java" import="hotifx.db.rpmbuild.hotfix_hibernate_rpmbuild_bean" %>
 		<% 
-			hotfix_hibernate_rpmbuild_bean bean=(hotfix_hibernate_rpmbuild_bean)request.getAttribute("akid_obj");
 			out.println("var akid=\""+bean.getAkid()+"\"");
 			out.println("var status=\""+bean.getStatus()+"\"");
 			out.println("var verstr=\""+bean.getVersionlist()+"\"");
@@ -168,6 +172,7 @@
 		//check status
 		$("#buildrpm").click(function() {
 			//var verlist = [];
+			$("#buildrpmprocess").css("background-color","f5f5f5");
 			console.log("buildrpm")
 			var list=$('#kerver_select').val()
 			var verstr=""

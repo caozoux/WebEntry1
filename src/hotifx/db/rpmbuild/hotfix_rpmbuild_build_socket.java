@@ -23,6 +23,7 @@ public class hotfix_rpmbuild_build_socket {
 	public static final String IP_ADDR = "11.238.157.159"; //服务器地址,这里要改成服务器的ip
 	public static final int PORT = 50001;//服务器端口号  
 	public Socket socket;
+	public String logbuf;
 	String kerverison;
 	public String rpmlist;
 	DataOutputStream outputStream;
@@ -34,9 +35,13 @@ public class hotfix_rpmbuild_build_socket {
 		BUILDUKNOW
 	}
 	public hotfix_rpmbuild_build_socket(String kerversion) {
+		logbuf="";
 		this.kerverison = kerversion;
 	}
 	
+	public String getBuildLog() {
+		return this.logbuf;
+	}
 	public int connect() throws Exception {
     	try {
     		//创建一个流套接字并将其连接到指定主机上的指定端口号
@@ -50,26 +55,49 @@ public class hotfix_rpmbuild_build_socket {
     	}
 		return 0;
 	}
+	public enumBuildState logBuildCmd() throws Exception {
+		String jsonString = "{\"command\":\"log\"}";
+		inputStream = new DataInputStream(new BufferedInputStream(socket.getInputStream())); 
+		byte[] jsonByte = jsonString.getBytes();
+	
+		
+		outputStream.write(jsonByte);
+		outputStream.flush();
+		System.out.println("send:"+jsonString);   
+		//读取服务器端数据
+		String strInputstream;
+		strInputstream=inputStream.readLine();
+		System.out.println("respone："+strInputstream);
+		JSONObject js = JSONObject.fromObject(strInputstream);
+		if (js.getString("state").equals("buildLog")) {
+			this.logbuf = js.getString("log");
+			return enumBuildState.BUILDLOG;
+		}
+		return enumBuildState.BUILDUKNOW;
+	}
+	
 	public enumBuildState waitBuildCmd() throws Exception {
 		try {
-		
+				System.out.println("waitBuildCmd start");
 				String jsonString = "{\"command\":\"wait\"}";
 
 				inputStream = new DataInputStream(new BufferedInputStream(socket.getInputStream())); 
 				byte[] jsonByte = jsonString.getBytes();
-        	
-				System.out.println("发的数据长度为:"+jsonByte.length);
+        		
 				outputStream.write(jsonByte);
 				outputStream.flush();
-				System.out.println("waitBuildCmd 传输数据完毕");   
+				System.out.println("send :"+jsonString);
+
 				//读取服务器端数据  
 				String strInputstream;
 				strInputstream=inputStream.readLine();
-				System.out.println("waitBuildCmd respone："+strInputstream);
+				System.out.println("respone："+strInputstream);
 				JSONObject js = JSONObject.fromObject(strInputstream);
-				System.out.println("waitBuildCmd respone："+js.getString("state"));
+
 
 				if (js.getString("state").equals("buildLog")) {
+					String buildlog="";
+					buildlog=js.getString("log");
 					System.out.println("waitBuildCmd respone：buildLog");
 					return enumBuildState.BUILDLOG;
 				} else if (js.getString("state").equals("buildFailed")) {					
@@ -109,16 +137,16 @@ public class hotfix_rpmbuild_build_socket {
 			//将String转化为byte[]
         	byte[] jsonByte = new byte[jsonString.length()+1];
         	jsonByte = jsonString.getBytes();
-        	System.out.println("发生编译命令:"+jsonString);
-     	    System.out.println("发的数据长度为:"+jsonByte.length);
+        	
      	    outputStream.write(jsonByte);
      	    outputStream.flush();
+     	    System.out.println("send:"+jsonString);
             //socket.shutdownOutput();
-                   
+        
             String strInputstream;
             strInputstream=inputStream.readLine();
             JSONObject js = JSONObject.fromObject(strInputstream);
-            System.out.println("sendBuildCmd 结果："+js.getString("state"));
+            System.out.println("respone："+js.getString("state"));
             
             if (js.getString("state") == "building") 
             	return 1;
@@ -159,7 +187,6 @@ public class hotfix_rpmbuild_build_socket {
 		        	byte[] jsonByte = jsonString.getBytes();
 		        
 		        	outputStream = new DataOutputStream(socket.getOutputStream());
- 	        	        System.out.println("发的数据长度为:"+jsonByte.length);
 		        	outputStream.write(jsonByte);
 		        	outputStream.flush();
 		            System.out.println("传输数据完毕");

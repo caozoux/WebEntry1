@@ -16,6 +16,8 @@ import hotfix.db.hotfixDbAkidOp;
 import hotfix.db.hotfix_hibernate_hotfixrpminfo;
 import hotfix.db.rpminfo.hotfix_hibernate_functionschange;
 import hotfix.db.rpminfo.hotfix_hibernate_functionschange_bean;
+import hotfix.db.testlink.hotfix_hibernate_testlink;
+import hotfix.db.testlink.hotfix_hibernate_testlink_bean;
 
 /**
  * Servlet implementation class hotfix_db_akid_show_update
@@ -52,9 +54,13 @@ public class hotfix_db_akid_show_update extends HttpServlet {
 	 */
 	protected void doGet(HttpServletRequest request, HttpServletResponse response) throws ServletException, IOException {
 		// TODO Auto-generated method stub
+		response.setCharacterEncoding("UTF-8"); 
+		request.setCharacterEncoding("utf-8");
 	 	PrintWriter out = response.getWriter();
 	 	String akid_str;
+
 	 	Map<String, String[]> mapstr = request.getParameterMap();
+	 	System.out.println(mapstr);
 	 	Iterator<Map.Entry<String, String[]>> it = mapstr.entrySet().iterator();
 	 	akid_str=mapstr.get("akid")[0];
 	 	
@@ -88,7 +94,15 @@ public class hotfix_db_akid_show_update extends HttpServlet {
 	 				o_akid.setAuthor(value[0]);
 	 				break;
 	 			case "functest":
-	 				o_akid.setFunctest(value[0]);
+	 				String[] functest_str = value[0].split("<br>");
+	 				for(String pstr : functest_str) {
+	 					System.out.println(pstr);
+	 				}
+	 				hotfix_hibernate_testlink mFac = hotfix_hibernate_testlink.getFactoryObj();
+	 				mFac.updateByAkid(akid_str, functest_str);
+
+	 				//hotfix_hibernate_functionschange hiber_rpminfo_functionchane = hotfix_hibernate_functionschange.getFactoryObj();
+	 				//hiber_rpminfo_functionchane.updateByAkid(akid_str, str);
 	 				break;
 	 			case "patchlink":
 	 				o_akid.setPatchlink(value[0]);
@@ -97,7 +111,10 @@ public class hotfix_db_akid_show_update extends HttpServlet {
 	 				o_akid.setAonelink(value[0]);
 	 				break;	
 	 			case "functionschange":
-	 				String[] str = value[0].split("\n");
+	 				String[] str = value[0].split("<br>");
+	 				for(String pstr : str) {
+	 					System.out.println(pstr);
+	 				}
 	 				hotfix_hibernate_functionschange hiber_rpminfo_functionchane = hotfix_hibernate_functionschange.getFactoryObj();
 	 				hiber_rpminfo_functionchane.updateByAkid(akid_str, str);
 	 				break;
@@ -112,8 +129,8 @@ public class hotfix_db_akid_show_update extends HttpServlet {
 	 		}
 	 		
 	 		hiber_rpminfo.update(o_akid);
-	 		//hiber_rpminfo.insert(o_akid);
-	 		//o_akid.insert_into_db();
+	 		out.println("okay");
+	 		out.close();
 	 	}
 	}
 

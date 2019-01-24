@@ -115,7 +115,12 @@ public class hotfix_servlet_rpmbuild_ajax extends HttpServlet {
     		return 1;
     	}
     	
-    	buiditem.startBuild(verlist);
+    	try {
+			buiditem.startBuild(verlist);
+		} catch (InterruptedException e) {
+			// TODO Auto-generated catch block
+			e.printStackTrace();
+		}
     	
     	return 0;
     }

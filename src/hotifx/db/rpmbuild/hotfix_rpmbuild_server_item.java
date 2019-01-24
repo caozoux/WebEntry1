@@ -2,6 +2,7 @@ package hotifx.db.rpmbuild;
 
 import java.io.BufferedReader;
 import java.io.BufferedWriter;
+import java.io.IOException;
 import java.io.InputStreamReader;
 import java.io.OutputStreamWriter;
 import java.util.ArrayList;
@@ -9,6 +10,8 @@ import java.util.Arrays;
 import java.util.Iterator;
 import java.util.List;
 import java.util.Map;
+import java.util.concurrent.locks.Lock;
+import java.util.concurrent.locks.ReentrantLock;
 
 import org.apache.commons.lang.StringUtils;
 
@@ -18,12 +21,13 @@ import hotifx.db.rpmbuild.hotfix_rpmbuild_build_socket.enumBuildState;
 public class hotfix_rpmbuild_server_item {
 	
 	public String akid;
+	public StringBuffer buildlog;
 	public List<String> kernellist;
 	public List<String> rpmllist;
 	public int kerneltype;
 	public build_status status;
 	public hotfix_hibernate_rpmbuild_bean build_bean; //记录hotfix build的目录
-
+	public static Lock lock = new ReentrantLock();// static确保只有一把锁
 	/*
 	 * kernel version, hotfix_signal_kernel_build
 	 */
@@ -36,6 +40,7 @@ public class hotfix_rpmbuild_server_item {
 		this.kernellist = list;
 		this.rpmllist = new ArrayList<String>();
 		this.status = build_status.INIT_STATUS;
+		this.buildlog = new StringBuffer();
 		hotfix_hibernate_rpmbuild hibernate_rpmbuild = hotfix_hibernate_rpmbuild.getFactoryObj();
 		build_bean = hibernate_rpmbuild.select(akid);
 
@@ -60,10 +65,15 @@ public class hotfix_rpmbuild_server_item {
 		CURRENTINGERR
 	};
 	
+	public StringBuffer getBuildlog() {
+		return this.buildlog;
+	}
+	
 	
 	/* 运行build的线程 */
 	public class CmdBuildThread  implements Runnable {  
 		hotfix_rpmbuild_server_item builditem;
+		
 		
 		public CmdBuildThread(hotfix_rpmbuild_server_item item)
 		{
@@ -81,7 +91,6 @@ public class hotfix_rpmbuild_server_item {
 
 				do {
 					state = build_socket.waitBuildCmd();
-					Thread.sleep(5000);
 				} while (state == enumBuildState.BUILDLOG);
 				
 				build_socket.closed();
@@ -98,9 +107,19 @@ public class hotfix_rpmbuild_server_item {
 			}
 			return 1;
 		}
+		
 		public void run() {
 			int ret = 0;
-		
+			while (!hotfix_rpmbuild_server_item.lock.tryLock()) {
+				System.out.println("buildserver is busy, please wait\n");
+				this.builditem.buildlog.append("buildserver is busy, please wait\n");
+				try {
+					Thread.sleep(10000);
+				} catch (InterruptedException e) {
+					// TODO Auto-generated catch block
+					e.printStackTrace();
+				}
+			}
 			if (builditem.kernellist.size() == 0)
 				ret = SendBuildKernel("");
 			else 
@@ -111,24 +130,11 @@ public class hotfix_rpmbuild_server_item {
 				}
 			
 			if (ret == 0) {
-				
 				builditem.CompleteBuild();
 			} else {
 				CompleteBuildFailed();
 			}
-			
-		
-			System.out.println("CmdBuildThread.run()"); 
-			/*while(i++<10) {
-				try {
-					Thread.sleep(1000);
-				} catch (InterruptedException e) {
-					// TODO Auto-generated catch block
-					e.printStackTrace();
-				}
-			}
-			builditem.CompleteBuild();
-			*/
+			hotfix_rpmbuild_server_item.lock.unlock();
 		}
 	}
 	
@@ -198,20 +204,30 @@ public class hotfix_rpmbuild_server_item {
 		return this.rpmllist;
 	}
 	
-	public void startBuild(String kervlist) {
+	public void startBuild(String kervlist) throws InterruptedException {
 		System.out.println("startBuild");
 		this.kernellist = Arrays.asList(kervlist.split(","));
 		this.status = build_status.BUIDING;
 		this.build_bean.status =  this.status.ordinal();
 		this.build_bean.setVersionlist(kervlist);
 		this.rpmllist.clear();
+		this.buildlog.delete(0,this.buildlog.length());
 		hotfix_hibernate_rpmbuild hibernate_rpmbuild = hotfix_hibernate_rpmbuild.getFactoryObj();
 		hibernate_rpmbuild.update(this.build_bean);
+		
+		try {
+			hotfix_rpmbuild_logtcpserver.getFactory();
+		} catch (IOException e) {
+			// TODO Auto-generated catch block
+			e.printStackTrace();
+		}
 		
 		CmdBuildThread myThread = new CmdBuildThread(this);  
 		Thread thread = new Thread(myThread);  
 		thread.start();  
+		
 	}
+	
 	private  void CompleteBuildFailed() {
 		this.status = build_status.BUIDINGERR;
 		this.build_bean.setStatus(this.status.ordinal());
@@ -220,6 +236,7 @@ public class hotfix_rpmbuild_server_item {
 		hibernate_rpmbuild.update(this.build_bean);
 		System.out.println("CompleteBuildFailed");
 	}
+	
 	private  void CompleteBuild() {
 		this.status = build_status.BUILT;
 		this.build_bean.setStatus(this.status.ordinal());

@@ -36,8 +36,8 @@ public class hotfixDbAkidOp {
 	String patch_link;
 	String functest;
 	
-	List<hotfixRpmInfo> RpmList;
-	List<hotfixChangeFunc> funcList;
+	//List<hotfixRpmInfo> RpmList;
+	//List<hotfixChangeFunc> funcList;
 	
 	public hotfixDbAkidOp(String akid_val)
 	{
